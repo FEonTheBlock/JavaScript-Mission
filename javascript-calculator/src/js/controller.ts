@@ -10,6 +10,6 @@ export const handleOperationClick = (e: MouseEvent) => {
   console.log(operation)
 }
 
-export const handleModifierCLick = (e: MouseEvent) => {
+export const handleModifierClick = (e: MouseEvent) => {
   console.log(e.target)
 }
