@@ -31,7 +31,7 @@ describe('2개의 숫자에 대해 뺄셈이 가능하다.', () => {
 });
 
 describe('2개의 숫자에 대해 곱셈이 가능하다.', () => {
-  it('200 * 50 = 1000', () => {
+  it('200 * 50 = 10000', () => {
     cy.get('.digit').contains('2').click();
     cy.get('.digit').contains('0').click();
     cy.get('.digit').contains('0').click();
@@ -40,7 +40,7 @@ describe('2개의 숫자에 대해 곱셈이 가능하다.', () => {
     cy.get('.digit').contains('0').click();
     cy.get('.operation').contains('=').click();
 
-    cy.get('#total').contains('1000');
+    cy.get('#total').contains('10000');
   });
 });
 
