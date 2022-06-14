@@ -11,6 +11,7 @@
   "plugins": ["import", "html"],
   "extends": ["airbnb-base", "airbnb-typescript/base"],
   "rules": {
-    "no-new": "off"
+    "no-new": "off",
+    "class-methods-use-this": "off"
   }
 }

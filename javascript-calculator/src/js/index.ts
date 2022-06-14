@@ -1,4 +1,5 @@
 import '../css/index.css';
 
-console.log('hi');
-console.log('ho');
+import Calculator from './app';
+
+new Calculator();
