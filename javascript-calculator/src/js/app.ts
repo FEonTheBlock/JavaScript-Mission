@@ -21,7 +21,7 @@ export default class Calculator {
   setOperand(operand: keyof State, value: string) {
     if (this.state[operand].length === 3) {
       alert('숫자는 한번에 최대 3자리 수까지 입력이 가능합니다. \n연산자를 눌러주세요.');
-      throw new Error('숫자는 한번에 최대 3자리 수까지 입력이 가능합니다.');
+      return;
     }
 
     this.setState({
@@ -44,11 +44,9 @@ export default class Calculator {
   }
 
   handleOperationClick(e: MouseEvent) {
-    if (this.state.result !== '') this.initializeCalculator();
-
     if (this.state.operand1 === '') {
       alert('피연산자 1개가 먼저 존재해야 합니다.');
-      throw new Error('피연산자 1개가 먼저 존재해야 합니다.');
+      return;
     }
 
     const operator = (e.target as HTMLButtonElement).textContent as string;
@@ -78,8 +76,7 @@ export default class Calculator {
         result,
       });
     } else if (!isCalculatePossible && operator === '=') {
-      alert('=연산은 피연산자 2개와 연산자 1개가 모두 있어야 합니다.');
-      throw new Error('=연산은 피연산자 2개와 연산자 1개가 모두 있어야 합니다.');
+      alert('= 연산은 피연산자 2개와 연산자 1개가 모두 있어야 합니다.');
     } else {
       this.setState({
         ...this.state,
