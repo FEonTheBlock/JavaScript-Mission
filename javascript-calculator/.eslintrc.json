@@ -10,5 +10,7 @@
   },
   "plugins": ["import", "html"],
   "extends": ["airbnb-base", "airbnb-typescript/base"],
-  "rules": {}
+  "rules": {
+    "no-new": "off"
+  }
 }
