@@ -6,7 +6,7 @@ module.exports = {
   mode: 'development',
   devtool: 'source-map',
   target: 'web',
-  entry: './src/js/index.js',
+  entry: './src/js/index.ts',
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
@@ -23,8 +23,8 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        use: 'babel-loader',
+        test: /\.ts$/,
+        use: 'ts-loader',
         exclude: /node_modules/,
       },
       {
@@ -33,5 +33,8 @@ module.exports = {
         exclude: /node_modules/,
       },
     ],
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
   },
 };
