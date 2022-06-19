@@ -6,7 +6,7 @@
   "author": "jkpark104 <jkrang104@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "npm run serve --open ",
+    "start": "npm run serve -- --open ",
     "serve": "webpack serve --mode development",
     "build": "webpack build"
   },
