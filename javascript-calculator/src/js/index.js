@@ -17,12 +17,9 @@ const digits = document.querySelector('.digits');
 const operations = document.querySelector('.operations');
 const ac_button = document.querySelector('.modifier');
 
-// render
 const render = () => {
   total.innerHTML = `${calc.total}`;
-
   calc.computedFormula();
-  // 이런게 computed
   formula.innerHTML = calc.formula;
 };
 
@@ -42,9 +39,7 @@ const handleOperationsClick = ({ target: operation }) => {
   if (!isOperation) return;
 
   const operator = operators[operation.innerText];
-
   calc.shouldGetResult() && calc.initCalculator(calc.calculateTotal());
-
   operator !== operators['='] && calc.setOperator(operator);
 
   render();

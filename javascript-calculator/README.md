@@ -19,6 +19,18 @@
   <img width="300" src="src/images/calculator_ui.png">
 </p>
 
+## 프로그램 시작 방법
+
+### 터미널 명령어
+
+```
+npx live-server .\javascript-calculator\
+```
+
+### VSCode 익스텐션 Live-server
+
+/javascript-calculator/index.html 파일을 Live server로 열기 `ALT+L ALT+O`
+
 ## 🎯 기능 요구사항
 
 - [x] 2개의 숫자에 대해 덧셈이 가능하다.
