@@ -1,4 +1,4 @@
-import { ERROR, LIMIT_LENGTH } from './handleError.js';
+import { LIMIT_LENGTH } from './handleError.js';
 
 export default class Utils {
   static isProperNum(num) {
@@ -6,10 +6,6 @@ export default class Utils {
   }
 
   static hasTwoNums(num1, num2) {
-    if (!num1 || !num2) {
-      alert(ERROR.HAS_NOT_TWO_NUMS);
-      return false;
-    }
-    return true;
+    return !!num1 && !!num2;
   }
 }

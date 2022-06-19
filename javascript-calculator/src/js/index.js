@@ -1,4 +1,5 @@
 import Calculator from './Calculator.js';
+import Utils from './utils/utils.js';
 import { ERROR } from './utils/handleError.js';
 
 const calculator = new Calculator();
@@ -33,6 +34,10 @@ document.querySelector('.operations').onclick = e => {
   }
 
   if (e.target.textContent === '=') {
+    if (!Utils.hasTwoNums(calculator.firstNum, calculator.secondNum)) {
+      alert(ERROR.HAS_NOT_TWO_NUMS);
+      return;
+    }
     calculator.calculate();
     calculator.renderResult();
   } else {

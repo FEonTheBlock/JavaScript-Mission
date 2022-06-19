@@ -34,11 +34,6 @@ export default class Calculator {
   }
 
   calculate() {
-    if (!Utils.hasTwoNums(this.firstNum, this.secondNum)) {
-      this.reset();
-      return;
-    }
-
     switch (this.operator) {
       case '+':
         this.result = +this.firstNum + +this.secondNum;
