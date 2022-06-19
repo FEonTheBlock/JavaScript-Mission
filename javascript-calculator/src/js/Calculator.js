@@ -1,12 +1,12 @@
 class Calculator {
-  #operand1;
-  #operand2;
+  #firstOperand;
+  #secondOperand;
   #operator;
   #target;
 
   constructor(target) {
-    this.#operand1 = '';
-    this.#operand2 = '';
+    this.#firstOperand = '';
+    this.#secondOperand = '';
     this.#operator = '';
     this.#target = target;
     return 0;
@@ -63,19 +63,19 @@ class Calculator {
     let operand = '';
 
     if (!this.#operator) {
-      operand = this.#operand1;
+      operand = this.#firstOperand;
       operand += input;
 
-      this.#operand1 = String(+operand).slice(0, 3);
-      this.render(this.#operand1);
+      this.#firstOperand = String(+operand).slice(0, 3);
+      this.render(this.#firstOperand);
       return;
     }
 
-    operand = this.#operand2;
+    operand = this.#secondOperand;
     operand += input;
 
-    this.#operand2 = String(+operand).slice(0, 3);
-    this.render(this.#operand2);
+    this.#secondOperand = String(+operand).slice(0, 3);
+    this.render(this.#secondOperand);
   }
 
   setOperator(operator) {
@@ -100,33 +100,33 @@ class Calculator {
   }
 
   clear() {
-    this.#operand1 = '';
-    this.#operand2 = '';
+    this.#firstOperand = '';
+    this.#secondOperand = '';
     this.#operator = '';
   }
 
   add() {
-    if (!this.#operand1 || !this.#operand2) return;
+    if (!this.#firstOperand || !this.#secondOperand) return;
 
-    return Number(this.#operand1) + Number(this.#operand2);
+    return Number(this.#firstOperand) + Number(this.#secondOperand);
   }
 
   minus() {
-    if (!this.#operand1 || !this.#operand2) return;
+    if (!this.#firstOperand || !this.#secondOperand) return;
 
-    return Number(this.#operand1) - Number(this.#operand2);
+    return Number(this.#firstOperand) - Number(this.#secondOperand);
   }
 
   multiply() {
-    if (!this.#operand1 || !this.#operand2) return;
+    if (!this.#firstOperand || !this.#secondOperand) return;
 
-    return Number(this.#operand1) * Number(this.#operand2);
+    return Number(this.#firstOperand) * Number(this.#secondOperand);
   }
 
   divide() {
-    if (!this.#operand1 || !this.#operand2) return;
+    if (!this.#firstOperand || !this.#secondOperand) return;
 
-    return Math.floor(+this.#operand1 / +this.#operand2);
+    return Math.floor(+this.#firstOperand / +this.#secondOperand);
   }
 }
 
