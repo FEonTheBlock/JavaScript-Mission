@@ -32,6 +32,16 @@ export function Calcurator({ Parent }) {
     onClick: e => {
       const { digit } = e.target.dataset;
       if (!digit) return;
+      if (this.state.activeIndex >= 2) {
+        window.alert('계산은 2개의 숫자만 가능합니다.');
+        this.setState({
+          ...this.state,
+          activeIndex: 1,
+          numbers: this.state.numbers.slice(0, 2),
+        });
+        return;
+      }
+
       const operand = this.state.numbers[this.state.activeIndex];
 
       if (operand?.length === 3) {
@@ -74,7 +84,6 @@ export function Calcurator({ Parent }) {
     onClick: e => {
       const { operation } = e.target.dataset;
       if (!operation) return;
-      console.log(this.state, operation);
 
       if (operation !== '=') {
         this.setState({
