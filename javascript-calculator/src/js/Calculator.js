@@ -5,7 +5,7 @@ export default class Calculator {
   constructor() {
     this.firstNum = '';
     this.secondNum = '';
-    this.operand = '';
+    this.operator = '';
     this.result = '';
   }
 
@@ -25,8 +25,8 @@ export default class Calculator {
     this.secondNum += num;
   }
 
-  setOperand(operand) {
-    this.operand = operand;
+  setOperator(operator) {
+    this.operator = operator;
   }
 
   setResult(result) {
@@ -39,7 +39,7 @@ export default class Calculator {
       return;
     }
 
-    switch (this.operand) {
+    switch (this.operator) {
       case '+':
         this.result = +this.firstNum + +this.secondNum;
         break;
@@ -57,7 +57,7 @@ export default class Calculator {
 
   // render expression
   render() {
-    document.querySelector('#total').textContent = this.firstNum + this.operand + this.secondNum;
+    document.querySelector('#total').textContent = this.firstNum + this.operator + this.secondNum;
   }
 
   // render calculated result
@@ -69,7 +69,7 @@ export default class Calculator {
   reset() {
     this.firstNum = '';
     this.secondNum = '';
-    this.operand = '';
+    this.operator = '';
     this.result = '';
     document.querySelector('#total').textContent = 0;
   }

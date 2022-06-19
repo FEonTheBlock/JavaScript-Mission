@@ -7,11 +7,11 @@ document.querySelector('.digits').onclick = e => {
   if (calculator.result !== '') {
     calculator.reset();
   }
-  if (calculator.operand === '') {
+  if (calculator.operator === '') {
     calculator.setFirstNum(e.target.textContent);
     calculator.render();
   }
-  if (calculator.operand !== '') {
+  if (calculator.operator !== '') {
     calculator.setSecondNum(e.target.textContent);
     calculator.render();
   }
@@ -26,7 +26,7 @@ document.querySelector('.operations').onclick = e => {
   }
 
   // 이미 오퍼레이터를 입력했는데 또 다시 입력하는 경우
-  if (calculator.operand !== '' && e.target.textContent !== '=') {
+  if (calculator.operator !== '' && e.target.textContent !== '=') {
     alert(ERROR.RESET_RESULT);
     calculator.reset();
     return;
@@ -36,7 +36,7 @@ document.querySelector('.operations').onclick = e => {
     calculator.calculate();
     calculator.renderResult();
   } else {
-    calculator.setOperand(e.target.textContent);
+    calculator.setOperator(e.target.textContent);
     calculator.render();
   }
 };
