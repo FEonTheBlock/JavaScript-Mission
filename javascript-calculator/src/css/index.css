@@ -53,11 +53,11 @@ button {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  min-width: 252px;
+  min-height: 5rem;
 }
 
 #total {
-  font-size: 4rem;
+  font-size: 3rem;
   margin: 0;
 }
 
