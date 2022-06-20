@@ -37,8 +37,7 @@ $digits.onclick = (e) => {
     //   :
     options.operandQ[options.operandIndex] * 10 + Number(e.target.textContent);
 
-  document.getElementById("total").textContent =
-    options.operandQ[options.operandIndex];
+  $total.textContent = options.operandQ[options.operandIndex];
 };
 
 $operations.onclick = (e) => {
