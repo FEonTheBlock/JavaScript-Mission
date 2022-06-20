@@ -1,6 +1,11 @@
-const $total = document.getElementById("total");
-const $digits = document.querySelector(".digits");
-const $operations = document.querySelector(".operations");
+conDOMst getElement = (str) =>
+  str.startsWith(".")
+    ? document.querySelector(str)
+    : document.getElementById(str);
+
+conDOMst $total = getElement("total");
+conDOMst $digits = getElement(".digits");
+conDOMst $operations = getElement(".operations");
 
 const options = {
   operandQ: [0, 0],
@@ -52,4 +57,4 @@ $operations.onclick = (e) => {
   }
 };
 
-document.querySelector(".modifier").onclick = reset;
+getDOMElement(".modifier").onclick = reset;
