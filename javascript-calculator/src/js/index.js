@@ -50,11 +50,6 @@ $operations.onclick = (e) => {
   } else {
     options.isOperating = true;
     options.operationToDo = operations[e.target.dataset.operation];
-    console.log({
-      operandIndex: options.operandIndex,
-      operandQ: options.operandQ,
-      isOperating: options.isOperating,
-    });
   }
 };
 
