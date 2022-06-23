@@ -1,0 +1,141 @@
+body * {
+  font-family: 'Bungee Hairline', cursive;
+  font-size: 3rem;
+  color: #444;
+  font-weight: bold;
+}
+
+main div {
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.header {
+  text-align: center;
+}
+
+.calculator {
+  width: 400px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 100px 500px;
+  grid-gap: 1rem;
+  background-color: lavender;
+  padding: 1rem;
+}
+
+.display {
+  background-color: #444;
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+  padding: 1rem;
+}
+
+.result {
+  color: #eee;
+  text-align: right;
+  padding: 0;
+  margin: 0;
+  line-height: 68px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-gap: 1rem;
+}
+
+.board button {
+  background-color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.numbers {
+  grid-column: 1 / 4;
+  grid-row: 2 / 6;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  grid-gap: 1rem;
+}
+
+.button-zero {
+  grid-column: 1 / 4;
+  grid-row: 4 / 5;
+}
+
+.button-one {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+.button-rwo {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.button-three {
+  grid-column: 3 / 4;
+  grid-row: 3 / 4;
+}
+
+.button-four {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+.button-five {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.button-six {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+}
+
+.button-seven {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.button-eight {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.button-nine {
+  grid-column: 3 / 4;
+  grid-row: 1 / 2;
+}
+
+.button-ac {
+  grid-column: 1 / 4;
+  grid-row: 1 / 2;
+}
+.button-plus {
+  grid-column: 4 / 5;
+  grid-row: 4 / 5;
+}
+.button-minus {
+  grid-column: 4 / 5;
+  grid-row: 3 / 4;
+}
+.button-multiply {
+  grid-column: 4 / 5;
+  grid-row: 2 / 3;
+}
+.button-divide {
+  grid-column: 4 / 5;
+  grid-row: 1 / 2;
+}
+.button-equal {
+  grid-column: 4 / 5;
+  grid-row: 5 / 6;
+}
