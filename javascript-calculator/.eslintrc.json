@@ -1,0 +1,29 @@
+{
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es2021": true
+  },
+  "plugins": ["import", "html"],
+  "extends": ["airbnb-base", "airbnb-typescript/base"],
+  "rules": {
+    "no-new": "off",
+    "class-methods-use-this": "off",
+    "import/prefer-default-export": "off",
+    "no-alert": "off",
+    "@typescript-eslint/comma-dangle": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 120,
+        "ignoreComments": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ]
+  }
+}
