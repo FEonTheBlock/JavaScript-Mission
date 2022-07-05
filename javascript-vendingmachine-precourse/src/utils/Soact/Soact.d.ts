@@ -6,6 +6,10 @@ interface DefaultProps {
   [property: string]: any;
 }
 
+type PropsWithDefaultProps<T> = DefaultProps & {
+  [p in keyof T]: T[p];
+};
+
 interface Component {
-  (props: DefaultProps): string;
+  <T>(props: T & DefaultProps): string;
 }
