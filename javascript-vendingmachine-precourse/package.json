@@ -29,7 +29,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "scripts": {
-    "start": "webpack serve --open",
+    "start": "webpack serve",
     "test": "cypress run --browser chrome"
   },
   "repository": {

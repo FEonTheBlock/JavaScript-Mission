@@ -3,6 +3,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const PORT = 9000;
+
 module.exports = {
   mode: 'development',
   entry: './src/index.ts',
@@ -10,11 +12,14 @@ module.exports = {
     extensions: ['.js', '.css', '.ts'],
   },
   devServer: {
-    port: 9000,
+    historyApiFallback: true,
+    open: false,
+    port: PORT,
   },
   devtool: 'source-map',
   output: {
     filename: 'bundle.js',
+    publicPath: `http://localhost:${PORT}/`,
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
