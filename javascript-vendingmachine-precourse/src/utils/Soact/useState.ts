@@ -1,35 +1,28 @@
 import RootComponent from '../../';
-
-let stateId = 0;
-
-interface Store {
-  [id: number]: unknown;
-}
-let store: Store = {};
-
-const permissionState = <State>(state: State) => {
-  if (!store[stateId]) {
-    store[stateId] = state;
-  }
-
-  return store[stateId] as State;
-};
+import {
+  permissionState,
+  stateId,
+  getState,
+  setStore,
+  resetStateId,
+  increaseStateId,
+} from './store';
 
 const useState = <InitState>(
   initialState: InitState
 ): [InitState, typeof setState] => {
   const currentStateId = stateId;
   const state = permissionState(initialState);
-  const setState = (nextState: InitState) => {
-    if (Object.is(store[currentStateId], nextState)) {
+  const setState: SetState<InitState> = (nextState) => {
+    if (Object.is(getState(currentStateId), nextState)) {
       return;
     }
-    store[currentStateId] = nextState;
-    stateId = 0;
-    RootComponent();
+    setStore(currentStateId, nextState);
+    resetStateId();
+    RootComponent(false);
   };
 
-  stateId++;
+  increaseStateId();
   return [state, setState];
 };
 

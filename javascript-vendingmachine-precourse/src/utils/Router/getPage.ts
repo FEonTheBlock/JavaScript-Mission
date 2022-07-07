@@ -1,5 +1,9 @@
 import * as pages from '../../pages';
 
+interface Routes {
+  [pageName: string]: Component;
+}
+
 const isPagePathname = (pathname: string): pathname is keyof typeof pages => {
   return typeof pathname === 'string';
 };
@@ -10,9 +14,8 @@ const converteSnakeToCamel = (string: string) =>
   );
 
 const getPage = (pathname: string): Component | false => {
-  const routes = { ...pages };
+  const routes = { ...pages } as Routes;
   const camelPathname = converteSnakeToCamel(pathname);
-
   return isPagePathname(camelPathname) && routes[camelPathname];
 };
 

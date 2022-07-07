@@ -1,7 +1,10 @@
 import { createElement, useState } from '../../utils/Soact';
-import style from './Test.module.css';
 
-const Test: Component = ({ children }) => {
+import { Link } from '../../utils/Router';
+
+import style from './test.module.css';
+
+const test = ({}: DefaultProps) => {
   const [number, setNumber] = useState(0);
   const handleClick = (e: Event) => {
     e.stopPropagation();
@@ -20,8 +23,9 @@ const Test: Component = ({ children }) => {
         { onclick: handleClick, className: style.button },
         '숫자 증가'
       )}
-      <div>${children}</div>`
+      ${Link({ href: 'foo', children: '하이' })}
+      `
   );
 };
 
-export default Test;
+export default test;

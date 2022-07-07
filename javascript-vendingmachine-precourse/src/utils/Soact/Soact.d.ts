@@ -1,5 +1,5 @@
 interface DefaultProps {
-  children?: string;
+  children?: string | null;
   onclick?: (e: Event) => any;
   className?: string;
   classList?: string[];
@@ -12,4 +12,8 @@ type PropsWithDefaultProps<T> = DefaultProps & {
 
 interface Component {
   <T>(props: T & DefaultProps): string;
+}
+
+interface SetState<T> {
+  (nextState: T): void;
 }
