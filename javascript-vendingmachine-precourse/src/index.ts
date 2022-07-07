@@ -1,19 +1,20 @@
-import { render, useState } from './utils/Soact';
-import { useRouter, getPage, makeRedirectPage } from './utils/Router';
+import { render, createElement } from './utils/Soact';
 
 export default render(() => {
-  const router = useRouter();
-  const [data, setData] = useState<Data>({
-    products: [{ product: '콜라', price: 1500, quantity: 20 }],
-    coins: { 500: 0, 100: 0, 50: 0, 10: 0 },
-  });
-
-  const page = getPage(router.pathname);
-  const redirectPage = makeRedirectPage('product-purchase-menu');
-
-  if (page) {
-    return page({ data, setData });
-  } else {
-    return redirectPage({ data, setData });
-  }
+  return createElement(
+    'div',
+    null,
+    createElement('input', { value: 'hi' }),
+    createElement(
+      'ul',
+      null,
+      createElement(
+        'li',
+        { onclick: (e) => console.log('아이템 1') },
+        createElement('a', { href: '#' }, '아이템1')
+      ),
+      createElement('li', null, '아이템2')
+    ),
+    '텍스트'
+  );
 }, document.querySelector('#app'));

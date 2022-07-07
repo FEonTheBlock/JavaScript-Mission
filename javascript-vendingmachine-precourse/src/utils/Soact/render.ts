@@ -1,34 +1,57 @@
-import { resetStateId } from './store';
 import { sanitize } from 'dompurify';
+import makeClassName from '../makeClassName';
 
-import createElement from './createElement';
-import { resetVDOM } from './VirtualDOM';
-import { runHydrate } from './hydrate';
-import { resetId } from './soactId';
+const setDOMAttribute = ($DOM: HTMLElement, attrs: SoactDomAttribute) => {
+  for (const [propName, propValue] of Object.entries(attrs)) {
+    const tmpPropName = propName as keyof DOMAttribute;
+    if (tmpPropName === 'className' && Array.isArray(propValue)) {
+      $DOM[tmpPropName] = makeClassName(propValue);
+    } else {
+      $DOM[tmpPropName] = propValue;
+    }
+  }
+};
+
+const setChildren = ($DOM: HTMLElement, children: (string | VDOM)[]) => {
+  for (const childVirtualDOM of children) {
+    if (typeof childVirtualDOM === 'string') {
+      $DOM.append(sanitize(childVirtualDOM));
+    } else {
+      appendDOM($DOM, childVirtualDOM);
+    }
+  }
+};
+
+const appendDOM = (
+  $parentElement: HTMLElement | DocumentFragment,
+  { el, props, children }: VDOM
+) => {
+  // realDOM 생성
+  const $realDOM = document.createElement(el);
+
+  // DOMAttribute 설정
+  if (props) {
+    setDOMAttribute($realDOM, props);
+  }
+
+  // children 순회
+  setChildren($realDOM, children);
+
+  $parentElement.appendChild($realDOM);
+};
 
 const render = (
-  renderHTML: () => ReturnType<typeof createElement>,
-  rootElement: HTMLElement | null
+  createvirtualDOM: () => VDOM,
+  $rootElement: HTMLElement | null
 ) => {
-  if (!rootElement) {
+  if (!$rootElement) {
     throw new Error('rootElement를 찾을 수 없습니다.');
   }
-  const HTML = sanitize(renderHTML());
-  rootElement.innerHTML = HTML;
-  runHydrate();
 
-  return (rerender = true) => {
-    resetId();
-    resetStateId();
-    if (rerender) {
-      resetVDOM();
-      const reRenderHTML = sanitize(renderHTML());
-      rootElement.innerHTML = reRenderHTML;
-    } else {
-      renderHTML();
-    }
-    runHydrate();
-  };
+  const $virtualDOMHead = document.createDocumentFragment();
+  const virtualDOM = createvirtualDOM();
+  appendDOM($virtualDOMHead, virtualDOM);
+  $rootElement.appendChild($virtualDOMHead);
 };
 
 export default render;
