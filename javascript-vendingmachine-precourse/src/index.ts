@@ -1,20 +1,15 @@
-import { render, createElement } from './utils/Soact';
+import { render, createElement, useState } from './utils/Soact/v2';
+
+const Test = ({ children }: PropsWithChildren<{}>) => {
+  return createElement('div', null, `test - ${children}`);
+};
 
 export default render(() => {
   return createElement(
     'div',
     null,
-    createElement('input', { value: 'hi' }),
-    createElement(
-      'ul',
-      null,
-      createElement(
-        'li',
-        { onclick: (e) => console.log('아이템 1') },
-        createElement('a', { href: '#' }, '아이템1')
-      ),
-      createElement('li', null, '아이템2')
-    ),
-    '텍스트'
+    '최상단',
+    createElement(Test, null, 'hi'),
+    '최하단'
   );
 }, document.querySelector('#app'));
