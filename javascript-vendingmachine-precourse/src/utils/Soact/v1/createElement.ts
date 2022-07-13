@@ -1,7 +1,7 @@
 const createElement = (
   el: keyof HTMLElementTagNameMap,
   props: SoactDomAttribute | null = null,
-  ...children: (string | VDOM)[]
+  ...children: Children
 ) => {
   return { el, props, children };
 };
