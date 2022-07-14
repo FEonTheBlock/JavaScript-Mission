@@ -28,21 +28,15 @@ type SoactDomAttributeList = [
   SoactDomAttribute[keyof SoactDomAttribute]
 ][];
 
-type Children = (string | VDOM)[];
-
-declare function createElement(
-  el: keyof HTMLElementTagNameMap,
-  props: SoactDomAttribute | null,
-  ...children: Children
-): {
-  el: keyof HTMLElementTagNameMap;
-  props: SoactDomAttribute | null;
-  children: Children;
-};
+type Children = (string | VDOM | undefined)[];
 
 interface DefaultProps {
-  children?: Children;
+  children: Children | [];
 }
 type PropsWithChildren<T> = {
   [p in keyof T]: T[p];
 } & DefaultProps;
+
+interface Dispatcher<T> {
+  (nextState: T): void;
+}

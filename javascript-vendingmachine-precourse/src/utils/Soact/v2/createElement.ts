@@ -1,6 +1,10 @@
+interface ExtendsProps {
+  [prop: string]: unknown;
+}
+
 const createElement = (
   el: keyof HTMLElementTagNameMap | Function,
-  props: SoactDomAttribute | null = null,
+  props: SoactDomAttribute | ExtendsProps | null = null,
   ...children: Children
 ) => {
   if (typeof el === 'function') {

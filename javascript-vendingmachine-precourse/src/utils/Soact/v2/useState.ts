@@ -1,5 +1,6 @@
 import { updateDOM } from './manageDOM';
 import {
+  store,
   permissionState,
   stateId,
   getState,
@@ -8,7 +9,8 @@ import {
   increaseStateId,
 } from './store';
 
-const useState = <T>(initialState: T): [T, typeof setState] => {
+const useState = <T>(initialState: T): [T, Dispatcher<T>] => {
+  console.log({ store, stateId });
   const currentStateId = stateId;
   const state = permissionState(initialState);
   const setState = (nextState: T) => {

@@ -1,20 +1,10 @@
 import { getRoot } from './../manageVDOM/root';
 import { getNewVDOM } from '../manageVDOM/newVDOM';
 import { getVDOM, setVDOM } from './../manageVDOM/VDOM';
-import setAttrs from './setAttrs';
 import createDOM from './createDOM';
+import setAttrs from './setAttrs';
 
 const isChanged = (initVDOM: VDOM | string, newVDOM: VDOM | string) => {
-  console.log({
-    initVDOM,
-    newVDOM,
-    isC:
-      typeof initVDOM !== typeof newVDOM ||
-      (typeof initVDOM === 'string' && initVDOM !== newVDOM) ||
-      (typeof initVDOM !== 'string' &&
-        typeof newVDOM !== 'string' &&
-        initVDOM.el !== newVDOM.el),
-  });
   return (
     typeof initVDOM !== typeof newVDOM ||
     (typeof initVDOM === 'string' && initVDOM !== newVDOM) ||
@@ -31,34 +21,53 @@ const updateDOM = (
 ) => {
   const updateElement = (
     $parent: HTMLElement,
-    newVDOM: string | VDOM,
+    newVDOM: string | VDOM = '',
     initVDOM?: string | VDOM,
     idx = 0
   ) => {
-    if (!initVDOM) {
-      console.log({ $parent, newVDOM });
-      $parent.appendChild(createDOM(newVDOM));
-    } else if (!newVDOM) {
-      $parent.removeChild($parent.childNodes[idx]);
-    } else if (isChanged(initVDOM, newVDOM)) {
-      $parent.replaceChild(createDOM(newVDOM), $parent.childNodes[idx]);
-    } else if (typeof initVDOM !== 'string' && typeof newVDOM !== 'string') {
-      const initVDOMChildLength = initVDOM.children.length;
-      const newVDOMChildLength = newVDOM.children.length;
+    const $next = createDOM(newVDOM);
+    const $current =
+      typeof initVDOM !== 'string' ? initVDOM?.current : undefined;
+    // console.log($next, $current);
 
-      for (let i = 0; i < newVDOMChildLength || i < initVDOMChildLength; i++) {
-        console.log({ $parent: $parent.childNodes[idx] });
-        updateElement(
-          $parent.childNodes[idx] as HTMLElement,
-          newVDOM.children[i],
-          initVDOM.children[i],
-          i
-        );
+    if (!initVDOM) {
+      $parent.appendChild($next);
+    } else if (!newVDOM) {
+      $current && $parent.removeChild($current);
+    } else if (isChanged(initVDOM, newVDOM)) {
+      console.log({ $next, $current });
+      if ($current) {
+        $current.replaceWith($next);
+      } else if ($parent.childNodes[idx]) {
+        $parent.childNodes[idx].replaceWith($next);
       }
+    } else if (typeof initVDOM !== 'string' && typeof newVDOM !== 'string') {
+      const length = Math.max(
+        initVDOM.children.length,
+        newVDOM.children.length
+      );
+
+      newVDOM.current = initVDOM.current;
+
+      for (let i = 0; i < length; i++) {
+        if ($parent) {
+          updateElement(
+            $current as HTMLElement,
+            newVDOM.children[i],
+            initVDOM.children[i],
+            i
+          );
+        }
+      }
+    }
+
+    if (typeof newVDOM !== 'string' && $parent) {
+      $current && setAttrs(newVDOM.props, $current as HTMLElement);
     }
   };
 
   updateElement($parent, newVDOM, initVDOM);
   setVDOM(newVDOM);
+  console.log(getVDOM());
 };
 export default updateDOM;
