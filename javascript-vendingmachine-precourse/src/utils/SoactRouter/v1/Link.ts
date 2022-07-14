@@ -1,12 +1,12 @@
-import { createElement } from '../../utils/Soact';
-import { useRouter } from '../../utils/Router';
+import { createElement } from '../../Soact/v2';
+import useRouter from './useRouter';
 
 interface LinkProps {
   id?: string;
   href: string;
 }
 
-const Link = ({ id, href, children }: PropsWithDefaultProps<LinkProps>) => {
+const Link = ({ id, href, children }: PropsWithChildren<LinkProps>) => {
   const router = useRouter();
   const converteHref = href[0] !== '/' ? `/${href}` : href;
 
@@ -22,7 +22,7 @@ const Link = ({ id, href, children }: PropsWithDefaultProps<LinkProps>) => {
         router.push(converteHref);
       },
     },
-    children
+    ...children
   );
 };
 

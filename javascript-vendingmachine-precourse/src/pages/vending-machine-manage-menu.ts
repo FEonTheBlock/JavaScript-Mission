@@ -1,18 +1,14 @@
+import { DataProps } from './../index';
+import { createElement } from '../utils/Soact/v2';
+
 import { VendingMachine } from '../layouts';
 
-interface VendingMachineManageMenuProps extends DefaultProps {
-  data: Data;
-  setData: SetState<Data>;
+interface VendingMachineManageMenuProps extends DataProps {}
+
+function VendingMachineManageMenu(
+  props: PropsWithChildren<VendingMachineManageMenuProps>
+) {
+  return createElement(VendingMachine, null, 'VendingMachineManageMenu');
 }
 
-const vendingMachineManageMenu = ({}: DefaultProps) => {
-  return `
-    ${VendingMachine({
-      children: `
-        <h2>잔돈 충전</h2>
-      `,
-    })}
-  `;
-};
-
-export default vendingMachineManageMenu;
+export default VendingMachineManageMenu;

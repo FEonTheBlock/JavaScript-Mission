@@ -1,18 +1,14 @@
+import { DataProps } from './../index';
+import { createElement } from '../utils/Soact/v2';
+
 import { VendingMachine } from '../layouts';
 
-interface ProductPurchaseMenuProps extends DefaultProps {
-  data: Data;
-  setData: SetState<Data>;
+interface ProductPurchaseMenuProps extends DataProps {}
+
+function ProductPurchaseMenu(
+  props: PropsWithChildren<ProductPurchaseMenuProps>
+) {
+  return createElement(VendingMachine, null, 'ProductPurchaseMenu');
 }
 
-const productPurchaseMenu = ({}: ProductPurchaseMenuProps) => {
-  return `
-    ${VendingMachine({
-      children: `
-        <h2>상품 구매</h2>
-      `,
-    })}
-  `;
-};
-
-export default productPurchaseMenu;
+export default ProductPurchaseMenu;

@@ -1,36 +1,28 @@
-import { createElement } from '../../utils/Soact';
-import { Link } from '../../utils/Router';
+import { createElement } from '../../utils/Soact/v2';
+import Link from '../../utils/SoactRouter/v1/Link';
 
-const Navigation = ({}: DefaultProps = {}) => {
+interface NavigationProps {}
+
+function Navigation(prop: PropsWithChildren<NavigationProps>) {
   return createElement(
-    'nav',
+    'ul',
     null,
-    `
-    <ul>
-      <li>
-        ${Link({
-          id: 'product-add-menu',
-          href: '/product-add-menu',
-          children: '상품 관리',
-        })}
-      </li>
-      <li>
-        ${Link({
-          id: 'vending-machine-manage-menu',
-          href: '/vending-machine-manage-menu',
-          children: '잔돈 충전',
-        })}
-      </li>
-      <li>
-        ${Link({
-          id: 'product-purchase-menu',
-          href: '/product-purchase-menu',
-          children: '상품 구매',
-        })}
-      </li>
-    </ul>
-    `
+    createElement(
+      'li',
+      null,
+      createElement(Link, { href: 'product-add-menu' }, '상품 관리')
+    ),
+    createElement(
+      'li',
+      null,
+      createElement(Link, { href: 'vending-machine-manage-menu' }, '잔돈 충전')
+    ),
+    createElement(
+      'li',
+      null,
+      createElement(Link, { href: 'product-purchase-menu' }, '상품 구매')
+    )
   );
-};
+}
 
 export default Navigation;

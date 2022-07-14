@@ -1,5 +1,6 @@
-import RootComponent from '../../';
+import { updateDOM } from './manageDOM';
 import {
+  store,
   permissionState,
   stateId,
   getState,
@@ -8,18 +9,17 @@ import {
   increaseStateId,
 } from './store';
 
-const useState = <InitState>(
-  initialState: InitState
-): [InitState, typeof setState] => {
+const useState = <T>(initialState: T): [T, Dispatcher<T>] => {
+  console.log({ store, stateId });
   const currentStateId = stateId;
   const state = permissionState(initialState);
-  const setState: SetState<InitState> = (nextState) => {
+  const setState = (nextState: T) => {
     if (Object.is(getState(currentStateId), nextState)) {
       return;
     }
     setStore(currentStateId, nextState);
     resetStateId();
-    RootComponent(false);
+    updateDOM();
   };
 
   increaseStateId();

@@ -1,17 +1,15 @@
-import { createElement } from '../../utils/Soact';
-
 import { Navigation } from '../../components';
+import { createElement } from '../../utils/Soact/v2';
 
-const VendingMachine = ({ children }: DefaultProps) => {
+interface VendingMachineProps {}
+
+function VendingMachine({ children }: PropsWithChildren<VendingMachineProps>) {
   return createElement(
-    'main',
+    'div',
     null,
-    `
-      <h1>🍿 자판기 🍿</h1>
-      ${Navigation()}
-      ${children}
-    `
+    createElement('h1', null, '자판기'),
+    createElement('main', null, createElement(Navigation, null), ...children)
   );
-};
+}
 
 export default VendingMachine;
