@@ -1,14 +1,20 @@
-import { DataProps } from './../index';
 import { createElement } from '../utils/Soact/v2';
 
 import { VendingMachine } from '../layouts';
+import {
+  InsertMoney,
+  BuyableCurrentProducts,
+  GiveChangeCoin,
+} from '../components';
 
-interface ProductPurchaseMenuProps extends DataProps {}
-
-function ProductPurchaseMenu(
-  props: PropsWithChildren<ProductPurchaseMenuProps>
-) {
-  return createElement(VendingMachine, null, 'ProductPurchaseMenu');
+function ProductPurchaseMenu() {
+  return createElement(
+    VendingMachine,
+    null,
+    createElement(InsertMoney),
+    createElement(BuyableCurrentProducts),
+    createElement(GiveChangeCoin)
+  );
 }
 
 export default ProductPurchaseMenu;

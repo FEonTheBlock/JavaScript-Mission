@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "우아한테크코스 프리코스 자판기 미션",
   "dependencies": {
+    "@woowacourse/mission-utils": "^1.0.1",
     "dompurify": "^2.3.8"
   },
   "devDependencies": {

@@ -1,3 +1,4 @@
+import { resetStateId } from './../store';
 import { getRoot } from './../manageVDOM/root';
 import { getNewVDOM } from '../manageVDOM/newVDOM';
 import { getVDOM, setVDOM } from './../manageVDOM/VDOM';
@@ -28,14 +29,12 @@ const updateDOM = (
     const $next = createDOM(newVDOM);
     const $current =
       typeof initVDOM !== 'string' ? initVDOM?.current : undefined;
-    // console.log($next, $current);
 
     if (!initVDOM) {
       $parent.appendChild($next);
     } else if (!newVDOM) {
       $current && $parent.removeChild($current);
     } else if (isChanged(initVDOM, newVDOM)) {
-      console.log({ $next, $current });
       if ($current) {
         $current.replaceWith($next);
       } else if ($parent.childNodes[idx]) {
@@ -67,7 +66,7 @@ const updateDOM = (
   };
 
   updateElement($parent, newVDOM, initVDOM);
+  resetStateId();
   setVDOM(newVDOM);
-  console.log(getVDOM());
 };
 export default updateDOM;

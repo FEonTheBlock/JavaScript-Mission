@@ -1,3 +1,4 @@
+import { resetStore } from './../../Soact/v2/store';
 import { createElement } from '../../Soact/v2';
 import useRouter from './useRouter';
 
@@ -20,6 +21,7 @@ const Link = ({ id, href, children }: PropsWithChildren<LinkProps>) => {
         e.preventDefault();
 
         router.push(converteHref);
+        resetStore();
       },
     },
     ...children

@@ -1,14 +1,17 @@
-import { DataProps } from './../index';
+import { Random } from '@woowacourse/mission-utils';
+
 import { createElement } from '../utils/Soact/v2';
 
 import { VendingMachine } from '../layouts';
+import { ChargeCoin, CurrentCoin } from '../components';
 
-interface VendingMachineManageMenuProps extends DataProps {}
-
-function VendingMachineManageMenu(
-  props: PropsWithChildren<VendingMachineManageMenuProps>
-) {
-  return createElement(VendingMachine, null, 'VendingMachineManageMenu');
+function VendingMachineManageMenu() {
+  return createElement(
+    VendingMachine,
+    null,
+    createElement(ChargeCoin),
+    createElement(CurrentCoin)
+  );
 }
 
 export default VendingMachineManageMenu;

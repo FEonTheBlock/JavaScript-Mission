@@ -1,24 +1,20 @@
 import { updateDOM } from './manageDOM';
 import {
-  store,
   permissionState,
   stateId,
-  getState,
-  setStore,
-  resetStateId,
+  getStoreState,
+  setStoreState,
   increaseStateId,
 } from './store';
 
 const useState = <T>(initialState: T): [T, Dispatcher<T>] => {
-  console.log({ store, stateId });
   const currentStateId = stateId;
   const state = permissionState(initialState);
   const setState = (nextState: T) => {
-    if (Object.is(getState(currentStateId), nextState)) {
+    if (Object.is(getStoreState(currentStateId), nextState)) {
       return;
     }
-    setStore(currentStateId, nextState);
-    resetStateId();
+    setStoreState(currentStateId, nextState);
     updateDOM();
   };
 
