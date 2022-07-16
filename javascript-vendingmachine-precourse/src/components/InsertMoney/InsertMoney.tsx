@@ -24,15 +24,18 @@ function InsertMoney() {
       <h2>금액 투입</h2>
       <form onsubmit={handleSubmit}>
         <input
+          id="charge-input"
           type="number"
           step={10}
           min={100}
           value={`${currentMoney}`}
           oninput={changeCurrentMoney}
         />
-        <button type="submit">투입하기</button>
+        <button id="charge-button" type="submit">
+          투입하기
+        </button>
       </form>
-      <span>투입한 금액: {`${money}원`}</span>
+      <span id="charge-amount">투입한 금액: {`${money}원`}</span>
     </div>
   );
 }

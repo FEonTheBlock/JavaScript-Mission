@@ -54,7 +54,9 @@ function GiveChangeCoin() {
   return (
     <div>
       <h2>잔돈</h2>
-      <button onclick={handleChangeCoin}>반환하기</button>
+      <button id="coin-return-button" onclick={handleChangeCoin}>
+        반환하기
+      </button>
       <table>
         <thead>
           <tr>
@@ -63,14 +65,14 @@ function GiveChangeCoin() {
           </tr>
         </thead>
         <tbody>
-          {coins?.map(({ value }) =>
-            createElement(
-              'tr',
-              null,
-              createElement('th', null, `${value}원`),
-              createElement('td', null, `${changeCoinMap[value]}개`)
-            )
-          )}
+          {coins?.map(({ value }) => (
+            <tr>
+              <th>{`${value}원`}</th>
+              <td
+                id={`coin-${value}-quantity`}
+              >{`${changeCoinMap[value]}개`}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

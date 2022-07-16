@@ -40,24 +40,29 @@ function AddProduct() {
       <h2>상품 추가하기</h2>
       <form onsubmit={handleSubmit}>
         <input
+          id="product-name-input"
           type="text"
           placeholder="상품명"
           value={product.name}
           oninput={changeProductName}
         />
         <input
+          id="product-price-input"
           type="number"
           placeholder="가격"
           value={`${product.price}`}
           oninput={changePrice}
         />
         <input
+          id="product-quantity-input"
           type="number"
           placeholder="수량"
           value={`${product.quantity}`}
           oninput={changeQuantity}
         />
-        <button type="submit">추가하기</button>
+        <button id="product-add-button" type="submit">
+          추가하기
+        </button>
       </form>
     </div>
   );

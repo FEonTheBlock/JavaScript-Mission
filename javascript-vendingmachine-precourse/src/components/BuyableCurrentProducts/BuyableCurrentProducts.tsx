@@ -40,11 +40,20 @@ function BuyableCurrentProducts() {
 
             return (
               <tr>
-                <th>{name}</th>
-                <td>{`${price}`}</td>
-                <td>{`${quantity}`}</td>
+                <th className="product-purchase-name" data-product-name={name}>
+                  {name}
+                </th>
+                <td
+                  className="product-purchase-price"
+                  data-product-price={`${price}`}
+                >{`${price}`}</td>
+                <td
+                  className="product-purchase-quantity"
+                  data-product-quantity={`${quantity}`}
+                >{`${quantity}`}</td>
                 <td>
                   <button
+                    className="purchase-button"
                     onclick={buyProduct}
                     disabled={!quantity || (money || 0) < price}
                   >

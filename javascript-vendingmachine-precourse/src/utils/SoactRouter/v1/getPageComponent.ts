@@ -1,5 +1,5 @@
 import * as pages from '../../../pages';
-import { convertSnakeToCamel } from '../../lib';
+import { convertKebabToPascal } from '../../lib';
 import useRouter from './useRouter';
 
 const Pages: {
@@ -9,7 +9,7 @@ const Pages: {
 export const getPageComponent = () => {
   const router = useRouter();
 
-  return Pages[convertSnakeToCamel(router.pathname)];
+  return Pages[convertKebabToPascal(router.pathname)];
 };
 
 export default getPageComponent;

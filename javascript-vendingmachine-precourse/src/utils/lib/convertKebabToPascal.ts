@@ -1,6 +1,6 @@
-const convertSnakeToPascal = (string: string) =>
+const convertKebabToPascal = (string: string) =>
   string.replace(/(^[a-z])|([-][a-z])/g, (snake) =>
     snake.replace('-', '').toUpperCase()
   );
 
-export default convertSnakeToPascal;
+export default convertKebabToPascal;

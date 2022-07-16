@@ -1,4 +1,4 @@
-import makeClassName from '../../../lib/makeClassName';
+import { makeClassName, convertKebabToCamel } from '../../../lib';
 
 const setAttrs = (props: SoactDomAttribute | null, $el: HTMLElement) => {
   if (!props) {
@@ -17,6 +17,10 @@ const setAttrs = (props: SoactDomAttribute | null, $el: HTMLElement) => {
 
   const attrList = Object.entries(props);
   for (const [propName, propValue] of attrList) {
+    if (propName.includes('data-')) {
+      $el.dataset[convertKebabToCamel(propName.replace('data-', ''))] =
+        propValue;
+    }
     const tmpPropName = propName as keyof DOMAttribute;
     if (tmpPropName === 'className' && Array.isArray(propValue)) {
       $el[tmpPropName] = makeClassName(propValue);

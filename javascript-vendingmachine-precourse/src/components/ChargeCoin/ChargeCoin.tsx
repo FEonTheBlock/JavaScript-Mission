@@ -34,10 +34,18 @@ function ChargeCoin() {
     <div>
       <h2>자판기 동전 충전하기</h2>
       <form onsubmit={handleSubmit}>
-        <input value={`${money || ''}`} oninput={changeMoney} />
-        <button type="submit">충전하기</button>
+        <input
+          id="vending-machine-charge-input"
+          value={`${money || ''}`}
+          oninput={changeMoney}
+        />
+        <button id="vending-machine-charge-button" type="submit">
+          충전하기
+        </button>
       </form>
-      <span>보유 금액: {asset ? `${asset}원` : ''}</span>
+      <span id="vending-machine-charge-amount">
+        보유 금액: {asset ? `${asset}원` : ''}
+      </span>
     </div>
   );
 }

@@ -27,17 +27,15 @@ function CurrentProducts() {
               deleteProductMutate(name);
             };
 
-            return createElement(
-              'tr',
-              null,
-              createElement('td', null, name),
-              createElement('td', null, `${price}`),
-              createElement('td', null, `${quantity}`),
-              createElement(
-                'td',
-                null,
-                createElement('button', { onclick: deleteProduct }, '삭제')
-              )
+            return (
+              <tr>
+                <td>{name}</td>
+                <td>{`${price}`}</td>
+                <td>{`${quantity}`}</td>
+                <td>
+                  <button onclick={deleteProduct}>삭제</button>
+                </td>
+              </tr>
             );
           })}
         </tbody>
