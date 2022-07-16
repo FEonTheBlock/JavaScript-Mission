@@ -16,14 +16,14 @@ function CurrentCoin() {
           </tr>
         </thead>
         <tbody>
-          {coins?.map(({ value, quantity }) =>
-            createElement(
-              'tr',
-              null,
-              createElement('th', null, `${value}원`),
-              createElement('td', null, `${quantity}개`)
-            )
-          )}
+          {coins?.map(({ value, quantity }) => (
+            <tr>
+              <th>{`${value}원`}</th>
+              <td
+                id={`vending-machine-coin-${value}-quantity`}
+              >{`${quantity}개`}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
