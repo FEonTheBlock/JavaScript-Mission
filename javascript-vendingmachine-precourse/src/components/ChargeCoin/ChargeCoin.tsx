@@ -1,6 +1,7 @@
+/** @jsx createElement */
+import { createElement, useState } from '../../utils/Soact/v2';
 import { useCoinsQuery, useChangeCoinsMutation } from '../../api/query/coins';
 import { makeCoinMap } from '../../utils/lib';
-import { createElement, useState } from '../../utils/Soact/v2';
 
 function ChargeCoin() {
   const { data: coins } = useCoinsQuery();
@@ -29,20 +30,15 @@ function ChargeCoin() {
     setMoney(0);
   };
 
-  return createElement(
-    'div',
-    null,
-    createElement('h2', null, '자판기 동전 충전하기'),
-    createElement(
-      'form',
-      { onsubmit: handleSubmit },
-      createElement('input', {
-        value: `${money || ''}`,
-        oninput: changeMoney,
-      }),
-      createElement('button', { type: 'submit' }, '충전하기')
-    ),
-    createElement('span', null, `보유 금액: ${asset ? `${asset}원` : ''}`)
+  return (
+    <div>
+      <h2>자판기 동전 충전하기</h2>
+      <form onsubmit={handleSubmit}>
+        <input value={`${money || ''}`} oninput={changeMoney} />
+        <button type="submit">충전하기</button>
+      </form>
+      <span>보유 금액: {asset ? `${asset}원` : ''}</span>
+    </div>
   );
 }
 

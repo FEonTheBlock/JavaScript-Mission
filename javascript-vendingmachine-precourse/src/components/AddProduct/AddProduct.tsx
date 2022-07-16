@@ -1,8 +1,9 @@
+/** @jsx createElement */
+import { createElement, useState } from '../../utils/Soact/v2';
 import {
   useProductsQuery,
   useAddProductMutation,
 } from '../../api/query/products';
-import { createElement, useState } from '../../utils/Soact/v2';
 
 function AddProduct() {
   const { data: products } = useProductsQuery();
@@ -34,35 +35,31 @@ function AddProduct() {
     }
   };
 
-  return createElement(
-    'div',
-    null,
-    createElement('h2', null, '상품 추가하기'),
-    createElement(
-      'form',
-      { onsubmit: handleSubmit },
-      createElement('input', {
-        type: 'text',
-        placeholder: '상품명',
-        value: product.name,
-        oninput: changeProductName,
-      }),
-      createElement('input', {
-        type: 'number',
-        placeholder: '가격',
-        step: 10,
-        min: 100,
-        value: `${product.price}`,
-        oninput: changePrice,
-      }),
-      createElement('input', {
-        type: 'number',
-        placeholder: '수량',
-        value: `${product.quantity}`,
-        oninput: changeQuantity,
-      }),
-      createElement('button', { type: 'submit' }, '추가하기')
-    )
+  return (
+    <div>
+      <h2>상품 추가하기</h2>
+      <form onsubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="상품명"
+          value={product.name}
+          oninput={changeProductName}
+        />
+        <input
+          type="number"
+          placeholder="가격"
+          value={`${product.price}`}
+          oninput={changePrice}
+        />
+        <input
+          type="number"
+          placeholder="수량"
+          value={`${product.quantity}`}
+          oninput={changeQuantity}
+        />
+        <button type="submit">추가하기</button>
+      </form>
+    </div>
   );
 }
 

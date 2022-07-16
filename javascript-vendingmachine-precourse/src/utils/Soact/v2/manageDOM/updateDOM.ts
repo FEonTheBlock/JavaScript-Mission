@@ -42,8 +42,8 @@ const updateDOM = (
       }
     } else if (typeof initVDOM !== 'string' && typeof newVDOM !== 'string') {
       const length = Math.max(
-        initVDOM.children.length,
-        newVDOM.children.length
+        initVDOM.children?.length || 0,
+        newVDOM.children?.length || 0
       );
 
       newVDOM.current = initVDOM.current;
@@ -52,8 +52,8 @@ const updateDOM = (
         if ($parent) {
           updateElement(
             $current as HTMLElement,
-            newVDOM.children[i],
-            initVDOM.children[i],
+            newVDOM.children?.[i],
+            initVDOM.children?.[i],
             i
           );
         }

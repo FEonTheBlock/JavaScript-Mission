@@ -1,5 +1,6 @@
-import { useMoneyQuery, useUpdateMoneyMutation } from '../../api/query/money';
+/** @jsx createElement */
 import { createElement, useState } from '../../utils/Soact/v2';
+import { useMoneyQuery, useUpdateMoneyMutation } from '../../api/query/money';
 
 function InsertMoney() {
   const { data: money } = useMoneyQuery();
@@ -18,23 +19,21 @@ function InsertMoney() {
     setCurrentMoney(+(e.target as HTMLInputElement).value);
   };
 
-  return createElement(
-    'div',
-    null,
-    createElement('h2', null, '금액 투입'),
-    createElement(
-      'form',
-      { onsubmit: handleSubmit },
-      createElement('input', {
-        type: 'number',
-        step: 10,
-        min: 100,
-        value: `${currentMoney}`,
-        oninput: changeCurrentMoney,
-      }),
-      createElement('button', null, '투입하기')
-    ),
-    createElement('span', null, `투입한 금액: ${money}원`)
+  return (
+    <div>
+      <h2>금액 투입</h2>
+      <form onsubmit={handleSubmit}>
+        <input
+          type="number"
+          step={10}
+          min={100}
+          value={`${currentMoney}`}
+          oninput={changeCurrentMoney}
+        />
+        <button type="submit">투입하기</button>
+      </form>
+      <span>투입한 금액: {`${money}원`}</span>
+    </div>
   );
 }
 

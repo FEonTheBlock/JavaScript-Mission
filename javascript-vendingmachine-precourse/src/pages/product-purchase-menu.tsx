@@ -1,3 +1,4 @@
+/** @jsx createElement */
 import { createElement } from '../utils/Soact/v2';
 
 import { VendingMachine } from '../layouts';
@@ -8,12 +9,12 @@ import {
 } from '../components';
 
 function ProductPurchaseMenu() {
-  return createElement(
-    VendingMachine,
-    null,
-    createElement(InsertMoney),
-    createElement(BuyableCurrentProducts),
-    createElement(GiveChangeCoin)
+  return (
+    <VendingMachine>
+      <InsertMoney />
+      <BuyableCurrentProducts />
+      <GiveChangeCoin />
+    </VendingMachine>
   );
 }
 

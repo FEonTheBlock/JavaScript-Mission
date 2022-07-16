@@ -7,9 +7,9 @@ const PORT = 9000;
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.ts',
+  entry: './src/index.tsx',
   resolve: {
-    extensions: ['.js', '.css', '.ts'],
+    extensions: ['.js', '.css', '.ts', '.tsx'],
   },
   devServer: {
     historyApiFallback: true,
@@ -37,11 +37,9 @@ module.exports = {
         ],
       },
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         exclude: /node_module/,
-        use: {
-          loader: 'ts-loader',
-        },
+        use: ['babel-loader', 'ts-loader'],
       },
       {
         test: /\.css$/,

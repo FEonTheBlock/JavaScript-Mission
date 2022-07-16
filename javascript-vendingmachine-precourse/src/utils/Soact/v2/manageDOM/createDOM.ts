@@ -8,7 +8,7 @@ const createDOM = (VDOM: VDOM | string = '') => {
   const $el = document.createElement(el);
   VDOM.current = $el;
   setAttrs(props, $el);
-  children.map(createDOM).forEach($el.appendChild.bind($el));
+  children?.map(createDOM).forEach($el.appendChild.bind($el));
 
   return $el;
 };

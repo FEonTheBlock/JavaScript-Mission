@@ -1,16 +1,15 @@
-import { Random } from '@woowacourse/mission-utils';
-
+/** @jsx createElement */
 import { createElement } from '../utils/Soact/v2';
 
 import { VendingMachine } from '../layouts';
 import { ChargeCoin, CurrentCoin } from '../components';
 
 function VendingMachineManageMenu() {
-  return createElement(
-    VendingMachine,
-    null,
-    createElement(ChargeCoin),
-    createElement(CurrentCoin)
+  return (
+    <VendingMachine>
+      <ChargeCoin />
+      <CurrentCoin />
+    </VendingMachine>
   );
 }
 

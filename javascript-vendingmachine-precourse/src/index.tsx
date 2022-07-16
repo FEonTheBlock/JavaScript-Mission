@@ -1,5 +1,6 @@
+/** @jsx createElement */
+import { createElement, render } from './utils/Soact/v2';
 import { getPageComponent, useRouter } from './utils/SoactRouter/v1';
-import { createElement, render, useState } from './utils/Soact/v2';
 
 export interface Product {
   name: string;
@@ -12,8 +13,6 @@ export interface Coin {
   quantity: number;
 }
 
-export interface DataProps {}
-
 export default render(() => {
   let Page = getPageComponent();
 
@@ -24,5 +23,5 @@ export default render(() => {
     Page = getPageComponent();
   }
 
-  return createElement(Page);
+  return <Page />;
 }, document.querySelector('#app'));

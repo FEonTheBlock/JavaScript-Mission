@@ -1,8 +1,9 @@
 {
   "compilerOptions": {
+    "jsx": "react",
     "strict": true,
     "target": "es5",
-    "module": "esnext",
+    "module": "amd",
     "allowJs": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
@@ -17,6 +18,22 @@
       }
     ]
   },
-  "include": ["**/*.ts"],
+  "include": [
+    "**/*.ts",
+    "src/pages/product-purchase-menu.tsx",
+    "src/index.tsx",
+    "src/pages/product-add-menu.tsx",
+    "src/pages/vending-machine-manage-menu.tsx",
+    "src/utils/SoactRouter/v1/Link.tsx",
+    "src/layouts/VendingMachine/VendingMachine.tsx",
+    "src/components/AddProduct/AddProduct.tsx",
+    "src/components/BuyableCurrentProducts/BuyableCurrentProducts.tsx",
+    "src/components/ChargeCoin/ChargeCoin.tsx",
+    "src/components/CurrentCoin/CurrentCoin.tsx",
+    "src/components/CurrentProducts/CurrentProducts.tsx",
+    "src/components/GiveChangeCoin/GiveChangeCoin.tsx",
+    "src/components/InsertMoney/InsertMoney.tsx",
+    "src/components/Navigation/Navigation.tsx"
+  ],
   "exclude": ["node_modules"]
 }

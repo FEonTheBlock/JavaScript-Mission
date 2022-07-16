@@ -3,3 +3,8 @@ declare module '@woowacourse/mission-utils' {
     pickNumberInList: <T>(array: T[]) => T;
   };
 }
+declare namespace JSX {
+  type IntrinsicElements = {
+    [key in keyof HTMLElementTagNameMap]: any;
+  };
+}

@@ -1,7 +1,7 @@
 interface VDOM {
   el: keyof HTMLElementTagNameMap;
   props: DOMAttribute | InputDOMAttribute | null;
-  children: Children;
+  children: Children | undefined;
   key?: number;
   current?: HTMLElement;
 }
@@ -31,7 +31,7 @@ type SoactDomAttributeList = [
 type Children = (string | VDOM | undefined)[];
 
 interface DefaultProps {
-  children: Children | [];
+  children?: Children | [];
 }
 type PropsWithChildren<T> = {
   [p in keyof T]: T[p];
