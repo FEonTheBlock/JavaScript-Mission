@@ -29,6 +29,7 @@ const calculator = (() => {
         case 'multiply':
           return leftSide * rightSide;
         case 'divide':
+          if(!rightSide) return alert('0으로 나눌 수 없습니다.');
           return Math.floor(leftSide / rightSide);
       }
     },
