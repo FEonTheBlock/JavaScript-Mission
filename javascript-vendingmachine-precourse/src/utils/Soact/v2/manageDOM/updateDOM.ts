@@ -4,69 +4,79 @@ import { getNewVDOM } from '../manageVDOM/newVDOM';
 import { getVDOM, setVDOM } from './../manageVDOM/VDOM';
 import createDOM from './createDOM';
 import setAttrs from './setAttrs';
+import { isTextVDOM } from '../../../typeGuard';
 
-const isChanged = (initVDOM: VDOM | string, newVDOM: VDOM | string) => {
+const isChanged = (
+  initVDOM: VDOM | TextVDOM | undefined,
+  newVDOM: VDOM | TextVDOM | undefined
+) => {
+  const isTextInitVDOM = isTextVDOM(initVDOM);
+  const isTextNewVDOM = isTextVDOM(newVDOM);
+
+  // 두 타입이 다르거나
+  // 두 타입이 TextVDOM일 때 두 값이 다르거나
+  // 두 타입이 VDOM일 때 두 VDOM의 el이 다르면 VDOM에 변화가 생긴 것
   return (
-    typeof initVDOM !== typeof newVDOM ||
-    (typeof initVDOM === 'string' && initVDOM !== newVDOM) ||
-    (typeof initVDOM !== 'string' &&
-      typeof newVDOM !== 'string' &&
-      initVDOM.el !== newVDOM.el)
+    isTextInitVDOM !== isTextNewVDOM ||
+    (isTextInitVDOM &&
+      isTextNewVDOM &&
+      !Object.is(initVDOM.value, newVDOM.value)) ||
+    (!isTextInitVDOM && !isTextNewVDOM && !Object.is(initVDOM?.el, newVDOM?.el))
   );
 };
 
 const updateDOM = (
   $parent: HTMLElement = getRoot(),
   newVDOM: VDOM = getNewVDOM(),
-  initVDOM: string | VDOM = getVDOM()
+  initVDOM: VDOM = getVDOM()
 ) => {
   const updateElement = (
-    $parent: HTMLElement,
-    newVDOM: string | VDOM = '',
-    initVDOM?: string | VDOM,
-    idx = 0
+    $parent: HTMLElement | Text,
+    newVDOM: TextVDOM | VDOM | undefined,
+    initVDOM?: TextVDOM | VDOM | undefined
   ) => {
     const $next = createDOM(newVDOM);
-    const $current =
-      typeof initVDOM !== 'string' ? initVDOM?.current : undefined;
-
-    if (!initVDOM) {
-      $parent.appendChild($next);
-    } else if (!newVDOM) {
-      $current && $parent.removeChild($current);
-    } else if (isChanged(initVDOM, newVDOM)) {
-      if ($current) {
-        $current.replaceWith($next);
-      } else if ($parent.childNodes[idx]) {
-        $parent.childNodes[idx].replaceWith($next);
+    const $current = initVDOM?.current;
+    if (!initVDOM || (isTextVDOM(initVDOM) && !initVDOM.value)) {
+      if ($next) {
+        $parent.appendChild($next);
       }
-    } else if (typeof initVDOM !== 'string' && typeof newVDOM !== 'string') {
+    } else if (!newVDOM || (isTextVDOM(newVDOM) && !newVDOM.value)) {
+      if ($current) {
+        $parent.removeChild($current);
+      }
+    } else if (isChanged(initVDOM, newVDOM)) {
+      if ($current && $next) {
+        $current.replaceWith($next);
+        newVDOM.current = $next;
+      }
+    } else if (!isTextVDOM(initVDOM) && !isTextVDOM(newVDOM)) {
       const length = Math.max(
         initVDOM.children?.length || 0,
         newVDOM.children?.length || 0
       );
-
-      newVDOM.current = initVDOM.current;
+      newVDOM.current = $current;
 
       for (let i = 0; i < length; i++) {
-        if ($parent) {
+        if ($current) {
           updateElement(
-            $current as HTMLElement,
+            $current,
             newVDOM.children?.[i],
-            initVDOM.children?.[i],
-            i
+            initVDOM.children?.[i]
           );
         }
       }
+    } else {
+      newVDOM.current = $current;
     }
 
-    if (typeof newVDOM !== 'string' && $parent) {
-      $current && setAttrs(newVDOM.props, $current as HTMLElement);
+    if (!isTextVDOM(newVDOM) && newVDOM) {
+      setAttrs(newVDOM.props, $current);
     }
   };
 
-  updateElement($parent, newVDOM, initVDOM);
   resetStateId();
+  updateElement($parent, newVDOM, initVDOM);
   setVDOM(newVDOM);
 };
 export default updateDOM;

@@ -1,14 +1,8 @@
 /** @jsx createElement */
 import { createElement, useState } from '../../utils/Soact/v2';
-import { useChangeCoinsMutation, useCoinsQuery } from '../../api/query/coins';
-import { useMoneyQuery, useUpdateMoneyMutation } from '../../api/query/money';
 
-interface CoinMap {
-  500: number;
-  100: number;
-  50: number;
-  10: number;
-}
+import { useCoinsQuery, useChangeCoinsMutation } from '../../api/query/coins';
+import { useMoneyQuery, useUpdateMoneyMutation } from '../../api/query/money';
 
 function GiveChangeCoin() {
   const { data: money } = useMoneyQuery();
@@ -27,7 +21,7 @@ function GiveChangeCoin() {
     if (!coins) {
       throw new Error('coins가 없습니다.');
     }
-    const initChangeCoinMap = { 500: 0, 100: 0, 50: 0, 10: 0 };
+    const initChangeCoinMap: CoinMap = { 500: 0, 100: 0, 50: 0, 10: 0 };
 
     for (const coin of coins) {
       while (money > 0 && coin.quantity > 0) {
@@ -67,10 +61,8 @@ function GiveChangeCoin() {
         <tbody>
           {coins?.map(({ value }) => (
             <tr>
-              <th>{`${value}원`}</th>
-              <td
-                id={`coin-${value}-quantity`}
-              >{`${changeCoinMap[value]}개`}</td>
+              <th>{value}원</th>
+              <td id={`coin-${value}-quantity`}>{changeCoinMap[value]}개</td>
             </tr>
           ))}
         </tbody>

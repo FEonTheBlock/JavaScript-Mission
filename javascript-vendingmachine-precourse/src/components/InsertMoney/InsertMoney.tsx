@@ -1,5 +1,6 @@
 /** @jsx createElement */
 import { createElement, useState } from '../../utils/Soact/v2';
+
 import { useMoneyQuery, useUpdateMoneyMutation } from '../../api/query/money';
 
 function InsertMoney() {
@@ -35,7 +36,9 @@ function InsertMoney() {
           투입하기
         </button>
       </form>
-      <span id="charge-amount">투입한 금액: {`${money}원`}</span>
+      <span>
+        투입한 금액: <span id="charge-amount">{money}</span>원
+      </span>
     </div>
   );
 }

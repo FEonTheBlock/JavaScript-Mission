@@ -1,4 +1,3 @@
-import { Product } from '../..';
 import { useQuery } from '../../utils/SoactQuery/v1';
 import setQueryData from '../../utils/SoactQuery/v1/setQueryData';
 import useMutation from '../../utils/SoactQuery/v1/useMutation';
@@ -8,7 +7,7 @@ const queryKey = 'products';
 
 // GET: products
 export const useProductsQuery = () => {
-  return useQuery<Product[]>(queryKey, () => localStorage.GET(queryKey, []));
+  return useQuery<Products>(queryKey, () => localStorage.GET(queryKey, []));
 };
 
 // POST: product
@@ -17,7 +16,7 @@ export const useAddProductMutation = () => {
     (newData) => localStorage.POST(queryKey, newData),
     {
       onSuccess: ({ data }) => {
-        setQueryData<Product[]>(queryKey, (prevData) => {
+        setQueryData<Products>(queryKey, (prevData) => {
           return [...(prevData || []), data];
         });
       },
@@ -38,7 +37,7 @@ export const useUpdateProductMutation = () => {
     },
     {
       onSuccess: ({ data: newData }) => {
-        setQueryData<Product[]>(queryKey, (prevData) => {
+        setQueryData<Products>(queryKey, (prevData) => {
           return prevData
             ? prevData.map((data) =>
                 data[key] === newData[key] ? newData : data
@@ -57,7 +56,7 @@ export const useDeleteProductMutation = () => {
     (targetValue) => localStorage.DELETE(queryKey, { key, value: targetValue }),
     {
       onSuccess: ({ data: targetValue }) => {
-        setQueryData<Product[]>(queryKey, (prevData) => {
+        setQueryData<Products>(queryKey, (prevData) => {
           return prevData
             ? prevData.filter((data) => data[key] !== targetValue)
             : [];

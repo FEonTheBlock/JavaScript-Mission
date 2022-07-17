@@ -1,5 +1,6 @@
 /** @jsx createElement */
 import { createElement } from '../../utils/Soact/v2';
+
 import { useCoinsQuery } from '../../api/query/coins';
 
 function CurrentCoin() {
@@ -18,10 +19,10 @@ function CurrentCoin() {
         <tbody>
           {coins?.map(({ value, quantity }) => (
             <tr>
-              <th>{`${value}원`}</th>
-              <td
-                id={`vending-machine-coin-${value}-quantity`}
-              >{`${quantity}개`}</td>
+              <th>{value}원</th>
+              <td id={`vending-machine-coin-${value}-quantity`}>
+                {quantity}개
+              </td>
             </tr>
           ))}
         </tbody>

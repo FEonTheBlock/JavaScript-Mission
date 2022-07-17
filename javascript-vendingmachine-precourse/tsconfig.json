@@ -3,12 +3,12 @@
     "jsx": "react",
     "strict": true,
     "target": "es5",
-    "module": "amd",
+    "module": "esnext",
     "allowJs": true,
     "moduleResolution": "node",
     "downlevelIteration": true,
     "sourceMap": true,
-    "lib": ["es5", "dom"],
+    "lib": ["es5", "esnext", "dom"],
     "plugins": [
       {
         "name": "typescript-plugin-css-modules",

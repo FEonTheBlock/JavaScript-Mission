@@ -1,6 +1,6 @@
 import { updateDOM } from './manageDOM';
 import {
-  permissionState,
+  getValidState,
   stateId,
   getStoreState,
   setStoreState,
@@ -9,7 +9,7 @@ import {
 
 const useState = <T>(initialState: T): [T, Dispatcher<T>] => {
   const currentStateId = stateId;
-  const state = permissionState(initialState);
+  const state = getValidState(initialState);
   const setState = (nextState: T) => {
     if (Object.is(getStoreState(currentStateId), nextState)) {
       return;

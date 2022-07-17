@@ -1,7 +1,6 @@
 import { Random } from '@woowacourse/mission-utils';
-import { Coin } from '../..';
 
-const makeCoinMap = (coins: Coin[], money: number) => {
+const makeCoinMap = (coins: Coins, money: number): CoinMap => {
   const coinMap = {
     500: 0,
     100: 0,

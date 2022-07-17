@@ -1,16 +1,32 @@
+import { isTextVDOM } from '../../../typeGuard';
 import setAttrs from './setAttrs';
 
-const createDOM = (VDOM: VDOM | string = '') => {
-  if (typeof VDOM === 'string') {
-    return document.createTextNode(VDOM);
-  }
-  const { el, props, children } = VDOM;
-  const $el = document.createElement(el);
-  VDOM.current = $el;
-  setAttrs(props, $el);
-  children?.map(createDOM).forEach($el.appendChild.bind($el));
+const createDOM = (vDOM: VDOM | TextVDOM | undefined) => {
+  if (isTextVDOM(vDOM)) {
+    const $textNode = document.createTextNode(vDOM.value);
+    const { current } = vDOM;
 
-  return $el;
+    if (
+      typeof current?.data === 'string' &&
+      Object.is(current?.data, $textNode.data)
+    ) {
+      return current;
+    } else {
+      vDOM.current = $textNode;
+      return $textNode;
+    }
+  } else if (vDOM) {
+    const { el, props, children } = vDOM;
+    const $el = document.createElement(el);
+    vDOM.current = $el;
+    setAttrs(props, $el);
+    children?.map(createDOM).forEach(($childEl) => {
+      if ($childEl) {
+        $el.appendChild($childEl);
+      }
+    });
+    return $el;
+  }
 };
 
 export default createDOM;

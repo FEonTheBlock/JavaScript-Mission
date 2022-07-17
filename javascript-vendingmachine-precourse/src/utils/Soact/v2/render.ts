@@ -1,7 +1,6 @@
 import { setRoot } from './manageVDOM/root';
 import { setCreateVDOM } from './manageVDOM/newVDOM';
 import { updateDOM } from './manageDOM';
-// import { createDom } from './manageDOM';
 
 const render = (createVDOM: () => VDOM, $root: HTMLElement | null) => {
   if (!$root) {

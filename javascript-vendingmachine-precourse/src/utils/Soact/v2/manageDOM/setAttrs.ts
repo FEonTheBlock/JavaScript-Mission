@@ -1,31 +1,37 @@
 import { makeClassName, convertKebabToCamel } from '../../../lib';
 
-const setAttrs = (props: SoactDomAttribute | null, $el: HTMLElement) => {
-  if (!props) {
+const setAttrs = (props: SoactProps, $el: HTMLElement | Text | undefined) => {
+  if (!($el instanceof HTMLElement)) {
     return;
   }
-  for (const attr of Object.values($el.attributes)) {
-    const tmpAttrName = attr.name as keyof DOMAttribute;
-    if (!props[tmpAttrName] && attr.value !== 'undefined') {
-      $el.removeAttribute(tmpAttrName);
-    } else if (props[tmpAttrName] && attr.value !== 'undefined') {
-      if (Object.is(`${props[tmpAttrName]}`, attr.value)) {
-        delete props[tmpAttrName];
+
+  if ($el.attributes?.length) {
+    for (const attr of Object.values($el.attributes)) {
+      const tmpAttrName = attr.name as keyof DOMAttribute;
+
+      if (props) {
+        const propValue = `${props[tmpAttrName]}`;
+        if (!propValue || propValue === 'undefined') {
+          $el.removeAttribute(attr.name);
+        } else if (Object.is(propValue, attr.value)) {
+          delete props[tmpAttrName];
+        }
+      } else {
+        $el.removeAttribute(attr.name);
       }
     }
   }
 
-  const attrList = Object.entries(props);
-  for (const [propName, propValue] of attrList) {
-    if (propName.includes('data-')) {
-      $el.dataset[convertKebabToCamel(propName.replace('data-', ''))] =
-        propValue;
-    }
-    const tmpPropName = propName as keyof DOMAttribute;
-    if (tmpPropName === 'className' && Array.isArray(propValue)) {
-      $el[tmpPropName] = makeClassName(propValue);
-    } else {
-      $el[tmpPropName] = propValue;
+  if (props) {
+    for (const [propName, propValue] of Object.entries(props)) {
+      if (propName.includes('data-')) {
+        $el.dataset[convertKebabToCamel(propName.replace('data-', ''))] =
+          propValue;
+      }
+      const tmpPropName = propName as keyof DOMAttribute;
+      if (tmpPropName === 'className') {
+        $el[tmpPropName] = makeClassName(propValue);
+      }
     }
   }
 };

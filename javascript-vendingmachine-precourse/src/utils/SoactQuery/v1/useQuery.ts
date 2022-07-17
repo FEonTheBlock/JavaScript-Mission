@@ -1,18 +1,19 @@
 import { updateDOM } from '../../Soact/v2/manageDOM';
-import { getState, setState, State } from './store';
+import makeKey from './makeKey';
+import { getState, setState } from './store';
 
 const useQuery = <T>(
   queryKey: string | string[],
   fetchFunc: () => Promise<T>
-): State<T> => {
+): SoactQueryState<T> => {
   const initState = { data: undefined, isLoading: true, isError: false };
-  const key = Array.isArray(queryKey) ? queryKey.join('&') : queryKey;
+  const key = makeKey(queryKey);
   const info = getState(key);
 
   if (info) {
     return info;
   } else {
-    const fetchData = async () => {
+    (async () => {
       let data;
       try {
         data = await fetchFunc();
@@ -29,8 +30,7 @@ const useQuery = <T>(
         });
       }
       updateDOM();
-    };
-    fetchData();
+    })();
     setState(key, initState);
     return initState;
   }

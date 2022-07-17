@@ -1,5 +1,6 @@
 /** @jsx createElement */
 import { createElement } from '../../utils/Soact/v2';
+
 import { Link } from '../../utils/SoactRouter/v1';
 
 function Navigation() {

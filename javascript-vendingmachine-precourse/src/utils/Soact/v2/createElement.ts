@@ -1,27 +1,29 @@
-interface ExtendsProps {
-  [prop: string]: unknown;
-}
-
 const createElement = (
-  el: keyof HTMLElementTagNameMap | Function,
-  props: SoactDomAttribute | ExtendsProps | null = null,
+  el: keyof HTMLElementTagNameMap | Component,
+  props: SoactProps = null,
   ...children: Children
-) => {
-  const tmpChildren: Children = [];
-
-  children.forEach((child) => {
-    Array.isArray(child)
-      ? child.forEach((c) => tmpChildren.push(c))
-      : tmpChildren.push(child);
+): VDOM | TextVDOM => {
+  const vDOMChildren: VDOMChildren = children.flat().map((child) => {
+    switch (typeof child) {
+      case 'string':
+      case 'number':
+      case 'boolean':
+      case 'undefined':
+        const value =
+          typeof child === 'string' || typeof child === 'number'
+            ? `${child}`
+            : '';
+        return { value, current: undefined };
+      default:
+        return child;
+    }
   });
 
-  for (const child of children) {
-  }
   if (typeof el === 'function') {
     const Component = el;
-    return Component({ ...props, children: tmpChildren });
+    return Component({ ...props, children: vDOMChildren });
   } else {
-    return { el, props, children: tmpChildren };
+    return { el, props, children: vDOMChildren, current: undefined };
   }
 };
 

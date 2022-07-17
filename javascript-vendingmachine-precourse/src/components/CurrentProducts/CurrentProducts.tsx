@@ -1,8 +1,9 @@
 /** @jsx createElement */
 import { createElement } from '../../utils/Soact/v2';
+
 import {
-  useDeleteProductMutation,
   useProductsQuery,
+  useDeleteProductMutation,
 } from '../../api/query/products';
 
 function CurrentProducts() {
@@ -30,8 +31,8 @@ function CurrentProducts() {
             return (
               <tr>
                 <td>{name}</td>
-                <td>{`${price}`}</td>
-                <td>{`${quantity}`}</td>
+                <td>{price}</td>
+                <td>{quantity}</td>
                 <td>
                   <button onclick={deleteProduct}>삭제</button>
                 </td>

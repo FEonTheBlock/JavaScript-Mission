@@ -1,7 +1,3 @@
-interface Store {
-  [id: number]: unknown;
-}
-
 let store: Store = {};
 export let stateId = 0;
 
@@ -17,7 +13,7 @@ export const increaseStateId = () => {
   stateId++;
 };
 
-export const permissionState = <State>(state: State) => {
+export const getValidState = <State>(state: State) => {
   if (store[stateId] === undefined) {
     store[stateId] = state;
   }

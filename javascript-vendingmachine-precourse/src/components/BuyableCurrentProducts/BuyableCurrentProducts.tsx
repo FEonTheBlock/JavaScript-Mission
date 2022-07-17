@@ -1,10 +1,11 @@
 /** @jsx createElement */
+import { createElement } from '../../utils/Soact/v2';
+
 import { useMoneyQuery, useUpdateMoneyMutation } from '../../api/query/money';
 import {
   useProductsQuery,
   useUpdateProductMutation,
 } from '../../api/query/products';
-import { createElement } from '../../utils/Soact/v2';
 
 function BuyableCurrentProducts() {
   const { data: money } = useMoneyQuery();
@@ -45,12 +46,16 @@ function BuyableCurrentProducts() {
                 </th>
                 <td
                   className="product-purchase-price"
-                  data-product-price={`${price}`}
-                >{`${price}`}</td>
+                  data-product-price={price}
+                >
+                  {price}
+                </td>
                 <td
                   className="product-purchase-quantity"
-                  data-product-quantity={`${quantity}`}
-                >{`${quantity}`}</td>
+                  data-product-quantity={quantity}
+                >
+                  {quantity}
+                </td>
                 <td>
                   <button
                     className="purchase-button"
