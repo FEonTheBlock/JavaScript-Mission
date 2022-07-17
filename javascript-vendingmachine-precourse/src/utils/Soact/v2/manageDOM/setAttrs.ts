@@ -31,6 +31,8 @@ const setAttrs = (props: SoactProps, $el: HTMLElement | Text | undefined) => {
       const tmpPropName = propName as keyof DOMAttribute;
       if (tmpPropName === 'className') {
         $el[tmpPropName] = makeClassName(propValue);
+      } else {
+        $el[tmpPropName] = propValue;
       }
     }
   }
