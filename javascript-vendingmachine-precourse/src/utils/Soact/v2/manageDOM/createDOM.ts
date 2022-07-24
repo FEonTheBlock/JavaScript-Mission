@@ -1,7 +1,7 @@
 import { isTextVDOM } from '../../../typeGuard';
 import setAttrs from './setAttrs';
 
-const createDOM = (vDOM: VDOM | TextVDOM | undefined) => {
+const createDOM = (vDOM?: VDOM | TextVDOM) => {
   if (isTextVDOM(vDOM)) {
     const $textNode = document.createTextNode(vDOM.value);
     const { current } = vDOM;
