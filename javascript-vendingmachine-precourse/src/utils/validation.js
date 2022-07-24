@@ -1,4 +1,4 @@
-import { ERRORS } from './constants.js';
+import { ERRORS, ERROR_BOUNDARIES } from './constants.js';
 import { getData } from './storage.js';
 
 // 상품 추가 - 상품 아이디 생성
@@ -9,6 +9,10 @@ export const makeProductId = () =>
 export const validateProdInfo = ({ prodName, prodPrice, prodQuantity }) => {
   // 상품명 미입력
   if (!prodName.trim().length) throw new Error(ERRORS.PROD_ADD.EMPTY_PROD_NAME);
+
+  // 상품 최소 금액 미만
+  if (prodPrice <= ERROR_BOUNDARIES.PRODUCT_ADD.MINIMUM_PRICE)
+    throw new Error(ERRORS.PROD_ADD.WRONG_PROD_PRICE);
 
   // 상품 가격 이상
   if (prodPrice % 10 !== 0) throw new Error(ERRORS.PROD_ADD.WRONG_PRICE_UNIT);
