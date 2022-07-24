@@ -27,5 +27,18 @@ export const validateChange = changeInput => {
   if (changeInput <= 0) throw new Error(ERRORS.CHANGE.EMPTY_CHANGE_AMOUNT);
 
   // 잔돈 단위 이상
-  if (changeInout % 10 !== 0) throw new Error(ERRORS.CHANGE.WRONG_CHANGE_UNIT);
+  if (changeInput % 10 !== 0) throw new Error(ERRORS.CHANGE.WRONG_CHANGE_UNIT);
+};
+
+// 상품 구매 - 등록된 상품 여부 확인
+export const validateProdList = () => {
+  const productList = getData('productList') ?? null;
+  if (!productList) throw new Error(ERRORS.PURCHASE.EMPTY_PRODUCT_LIST);
+};
+
+// 상품 구매 - 잔돈 확인
+export const validateChanges = () => {
+  const changeInfo = getData('inserted') ?? 0;
+  if (!changeInfo) throw new Error(ERRORS.PURCHASE.EMPTY_CHANGE);
+  changeInfo;
 };
