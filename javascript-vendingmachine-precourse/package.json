@@ -2,9 +2,10 @@
   "name": "javascript-vendingmachine-precourse",
   "version": "1.0.0",
   "description": "우아한테크코스 프리코스 자판기 미션을 이용한 FEOnTheBlock 미션",
-  "dependencies": {},
+  "dependencies": {
+    "@woowacourse/mission-utils": "^1.0.1"
+  },
   "devDependencies": {
-    "cypress": "8.7.0",
     "@babel/core": "^7.18.2",
     "@babel/preset-env": "^7.18.2",
     "@babel/preset-typescript": "^7.17.12",
@@ -14,6 +15,7 @@
     "babel-loader": "^8.2.5",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.1",
+    "cypress": "8.7.0",
     "eslint": "^8.2.0",
     "eslint-config-airbnb-base": "15.0.0",
     "eslint-config-prettier": "^8.5.0",
