@@ -1,7 +1,8 @@
 import '@/styles/index.css';
+import { App } from './App';
 
 const $app = document.getElementById('app');
 
 if ($app) {
-  $app.innerHTML = '<h1>hi</h1>';
+  $app.append(App());
 }
