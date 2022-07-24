@@ -32,14 +32,22 @@ function ChargeCoin() {
     setMoney(0);
   };
 
+  const handleInvalid = () => {
+    alert('유효한 숫자를 입력하세요.');
+  };
+
   return (
     <div>
       <h2>자판기 동전 충전하기</h2>
       <form onsubmit={handleSubmit}>
         <input
           id="vending-machine-charge-input"
+          type="number"
           value={`${money || ''}`}
           oninput={changeMoney}
+          step={10}
+          min={0}
+          oninvalid={handleInvalid}
         />
         <button id="vending-machine-charge-button" type="submit">
           충전하기
