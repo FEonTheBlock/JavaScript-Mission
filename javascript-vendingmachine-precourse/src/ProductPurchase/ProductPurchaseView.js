@@ -20,7 +20,7 @@ export default class ProductPurchaseView {
         <table id="available-product-table"></table>
       </section>
       <section id="change-section">
-        <h2>잔돈</h2>
+        <h2>반환된 잔돈</h2>
         <button id="coin-return-button">반환하기</button>
         <table id="coin-return-table"></table>
       </section>
