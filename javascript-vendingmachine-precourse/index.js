@@ -1,5 +1,6 @@
 const productAddButton = document.getElementById('product-add-button');
 const vendingMachineChargeButton = document.getElementById('vending-machine-charge-button');
+const chargeButton = document.getElementById('charge-button');
 
 productAddButton.addEventListener('click',()=>{
     const productNameInput = document.getElementById('product-name-input');
@@ -58,4 +59,20 @@ vendingMachineChargeButton.addEventListener('click',()=>{
     vendingMachineChargeInput.value='';
 });
 
+chargeButton.addEventListener('click',()=>{
+   const chargeInput = document.getElementById('charge-input');
 
+   let money = chargeInput.value/1;
+
+   if(Number.isNaN(money)){
+       alert('숫자를 입력해주세요');
+       chargeInput.value='';
+       return;
+   }
+   
+   const chargeAmount = document.getElementById('charge-amount');
+   const oldAmount = parseInt(chargeAmount.textContent);
+
+   chargeAmount.textContent = `${oldAmount? oldAmount+money : money}원`;
+   chargeInput.value='';
+});
