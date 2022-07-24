@@ -75,7 +75,5 @@ const updateDOM = (
   resetStateId();
   updateElement($parent, newVDOM, initVDOM);
   setVDOM(newVDOM);
-
-  console.log(JSON.stringify(newVDOM));
 };
 export default updateDOM;
