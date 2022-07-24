@@ -8,7 +8,7 @@ export const makeProductId = () =>
 // 상품 추가 - 유효성 검사
 export const validateProdInfo = ({ prodName, prodPrice, prodQuantity }) => {
   // 상품명 미입력
-  if (prodName === '') throw new Error(ERRORS.PROD_ADD.EMPTY_PROD_NAME);
+  if (!prodName.trim().length) throw new Error(ERRORS.PROD_ADD.EMPTY_PROD_NAME);
 
   // 상품 가격 이상
   if (prodPrice % 10 !== 0) throw new Error(ERRORS.PROD_ADD.WRONG_PRICE_UNIT);
