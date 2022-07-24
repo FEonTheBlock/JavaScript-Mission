@@ -25,6 +25,7 @@ export type Store = {
   actualMenu: Menu;
   product: Product[];
   charge: Charge;
+  insertedCoin: number;
 };
 
 export type Coin = 10 | 50 | 100 | 500;

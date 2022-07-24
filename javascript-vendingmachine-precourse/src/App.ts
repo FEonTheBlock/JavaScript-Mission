@@ -15,14 +15,14 @@ export const App = (store: store) => {
   const $contentChildren = Array(...$content.children);
   $app.append($title, $tabs, $content);
 
-  addClassWithoutExcept('hidden', $contentChildren, [actualMenu]);
+  // addClassWithoutExcept('hidden', $contentChildren, [actualMenu]);
 
-  $tabs.addEventListener('click', (e: any) => {
-    const id: Menu = e.target.getAttribute('id');
-    if (id === store.store.actualMenu || e.target.type !== 'button') return;
-    store.setActualMenu = id;
-    addClassWithoutExcept('hidden', $contentChildren, [id]);
-  });
+  // $tabs.addEventListener('click', (e: any) => {
+  //   const id: Menu = e.target.getAttribute('id');
+  //   if (id === store.store.actualMenu || e.target.type !== 'button') return;
+  //   store.setActualMenu = id;
+  //   addClassWithoutExcept('hidden', $contentChildren, [id]);
+  // });
 
   return $app;
 };

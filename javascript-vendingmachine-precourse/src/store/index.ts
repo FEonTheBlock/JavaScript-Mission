@@ -4,11 +4,13 @@ class store {
   private actualMenu: Menu;
   private product: Product[];
   private charge: Charge;
+  private insertedCoin: number;
 
-  constructor({ actualMenu, product, charge }: Store) {
+  constructor({ actualMenu, product, charge, insertedCoin = 0 }: Store) {
     this.actualMenu = actualMenu;
     this.product = product;
     this.charge = charge;
+    this.insertedCoin = insertedCoin;
   }
 
   get store() {
@@ -16,6 +18,7 @@ class store {
       actualMenu: this.actualMenu,
       product: this.product,
       charge: this.charge,
+      insertedCoin: this.insertedCoin,
     };
   }
 
@@ -34,9 +37,15 @@ class store {
     this.render();
   }
 
+  set setInsertedCoin(coin: number) {
+    this.insertedCoin = coin;
+    this.render();
+  }
+
   set resetStore({ charge, product }: Store) {
     this.charge = charge;
     this.product = product;
+    this.insertedCoin = 0;
     this.render();
   }
 

@@ -30,12 +30,9 @@ export const ManageMenu = (store: store) => {
 
   const $chargeAmountWrap = document.createElement('div');
   $chargeAmountWrap.innerHTML = `
-    보유 금액: <span id='vending-machine-charge-amount'>${
-      Object.entries(charge).reduce(
-        (acc, [coin, amount]) => acc + +coin * amount,
-        0
-      ) + '원'
-    }</span>
+    보유 금액: <span id='vending-machine-charge-amount'>${Object.entries(
+      charge
+    ).reduce((acc, [coin, amount]) => acc + +coin * amount, 0)}</span>'원'
   `;
   $manageCoinInput.append($manageButton, $chargeAmountWrap);
 
@@ -51,19 +48,19 @@ export const ManageMenu = (store: store) => {
   <tbody>
     <tr>
       <th>500원</th>
-      <td id="vending-machine-coin-500-quantity">${charge[500]}</td>
+      <td id="vending-machine-coin-500-quantity">${charge[500]}개</td>
     </tr>
     <tr>
       <th>100원</th>
-      <td id="vending-machine-coin-100-quantity">${charge[100]}</td>
+      <td id="vending-machine-coin-100-quantity">${charge[100]}개</td>
     </tr>
     <tr>
       <th>50원</th>
-      <td id="vending-machine-coin-50-quantity">${charge[50]}</td>
+      <td id="vending-machine-coin-50-quantity">${charge[50]}개</td>
     </tr>
     <tr>
       <th>10원</th>
-      <td id="vending-machine-coin-10-quantity">${charge[10]}</td>
+      <td id="vending-machine-coin-10-quantity">${charge[10]}개</td>
     </tr>
   </tbody>
 </table>`;
