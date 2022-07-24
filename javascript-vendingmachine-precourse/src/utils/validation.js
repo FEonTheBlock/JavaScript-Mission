@@ -38,7 +38,7 @@ export const validateProdList = () => {
 
 // 상품 구매 - 잔돈 확인
 export const validateChanges = () => {
-  const changeInfo = getData('inserted') ?? 0;
+  const changeInfo = getData('changeInfo') ?? 0;
   if (!changeInfo) throw new Error(ERRORS.PURCHASE.EMPTY_CHANGE);
   changeInfo;
 };
