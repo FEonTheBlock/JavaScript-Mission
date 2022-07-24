@@ -1,0 +1,20 @@
+.hidden {
+  display: none;
+}
+
+table {
+  border: 1px solid pink;
+  border-radius: 5px;
+}
+
+tr > th {
+  background-color: pink;
+}
+
+tr > * {
+  padding: 5px;
+}
+
+tr:hover {
+  background-color: lightgray;
+}
