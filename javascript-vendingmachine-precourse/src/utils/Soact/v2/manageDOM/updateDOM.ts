@@ -25,58 +25,57 @@ const isChanged = (
   );
 };
 
+const updateElement = (
+  $parent: HTMLElement | Text,
+  newVDOM: TextVDOM | VDOM | undefined,
+  initVDOM?: TextVDOM | VDOM | undefined
+) => {
+  const $current = initVDOM?.current;
+  if (!initVDOM || (isTextVDOM(initVDOM) && !initVDOM.value)) {
+    const $next = createDOM(newVDOM);
+    if ($next) {
+      $parent.appendChild($next);
+    }
+  } else if (!newVDOM || (isTextVDOM(newVDOM) && !newVDOM.value)) {
+    if ($current) {
+      $parent.removeChild($current);
+    }
+  } else if (isChanged(initVDOM, newVDOM)) {
+    const $next = createDOM(newVDOM);
+    if ($current && $next) {
+      $current.replaceWith($next);
+      newVDOM.current = $next;
+    }
+  } else if (!isTextVDOM(initVDOM) && !isTextVDOM(newVDOM)) {
+    const length = Math.max(
+      initVDOM.children?.length || 0,
+      newVDOM.children?.length || 0
+    );
+    newVDOM.current = $current;
+
+    for (let i = 0; i < length; i++) {
+      if ($current) {
+        updateElement($current, newVDOM.children?.[i], initVDOM.children?.[i]);
+      }
+    }
+  } else {
+    newVDOM.current = $current;
+  }
+
+  if (!isTextVDOM(newVDOM) && newVDOM) {
+    setAttrs(newVDOM.props, $current);
+  }
+};
+
 const updateDOM = (
   $parent: HTMLElement = getRoot(),
   newVDOM: VDOM = getNewVDOM(),
   initVDOM: VDOM = getVDOM()
 ) => {
-  const updateElement = (
-    $parent: HTMLElement | Text,
-    newVDOM: TextVDOM | VDOM | undefined,
-    initVDOM?: TextVDOM | VDOM | undefined
-  ) => {
-    const $next = createDOM(newVDOM);
-    const $current = initVDOM?.current;
-    if (!initVDOM || (isTextVDOM(initVDOM) && !initVDOM.value)) {
-      if ($next) {
-        $parent.appendChild($next);
-      }
-    } else if (!newVDOM || (isTextVDOM(newVDOM) && !newVDOM.value)) {
-      if ($current) {
-        $parent.removeChild($current);
-      }
-    } else if (isChanged(initVDOM, newVDOM)) {
-      if ($current && $next) {
-        $current.replaceWith($next);
-        newVDOM.current = $next;
-      }
-    } else if (!isTextVDOM(initVDOM) && !isTextVDOM(newVDOM)) {
-      const length = Math.max(
-        initVDOM.children?.length || 0,
-        newVDOM.children?.length || 0
-      );
-      newVDOM.current = $current;
-
-      for (let i = 0; i < length; i++) {
-        if ($current) {
-          updateElement(
-            $current,
-            newVDOM.children?.[i],
-            initVDOM.children?.[i]
-          );
-        }
-      }
-    } else {
-      newVDOM.current = $current;
-    }
-
-    if (!isTextVDOM(newVDOM) && newVDOM) {
-      setAttrs(newVDOM.props, $current);
-    }
-  };
-
   resetStateId();
   updateElement($parent, newVDOM, initVDOM);
   setVDOM(newVDOM);
+
+  console.log(JSON.stringify(newVDOM));
 };
 export default updateDOM;
