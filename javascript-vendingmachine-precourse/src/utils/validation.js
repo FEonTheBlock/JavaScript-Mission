@@ -20,3 +20,12 @@ export const validateProdInfo = ({ prodName, prodPrice, prodQuantity }) => {
   if ((getData('productList') ?? []).map(prod => prod.name).includes(prodName))
     throw new Error(ERRORS.PROD_ADD.DUPLICATE_PROD_NAME);
 };
+
+// 잔돈 교환 - 유효성 검사
+export const validateChange = changeInput => {
+  // 잔돈이 0원 이하로 입력된 경우
+  if (changeInput <= 0) throw new Error(ERRORS.CHANGE.EMPTY_CHANGE_AMOUNT);
+
+  // 잔돈 단위 이상
+  if (changeInout % 10 !== 0) throw new Error(ERRORS.CHANGE.WRONG_CHANGE_UNIT);
+};
