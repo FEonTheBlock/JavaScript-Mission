@@ -1,11 +1,7 @@
-import { INITIAL_COIN_LIST } from "../constant/index.js";
-import Component from "../core/Component.js";
-import { $ } from "../utils/dom.js";
-import {
-  generatePayCoinList,
-  isMultipleOfTen,
-  isPositiveInteger,
-} from "../utils/index.js";
+import { INITIAL_COIN_LIST } from '../constant/index.js';
+import Component from '../core/Component.js';
+import { $ } from '../utils/dom.js';
+import { generatePayCoinList, isMultipleOfTen, isPositiveInteger } from '../utils/index.js';
 
 export default class ProductPurchase extends Component {
   template() {
@@ -14,7 +10,7 @@ export default class ProductPurchase extends Component {
         <h2>금액 투입</h2>
         <input id="charge-input" type="number" />
         <button id="charge-button">투입하기</button>
-        <p id="charge-amount">투입한 금액: ${this.inputMoney}원</p>
+        <p>투입한 금액: <span id="charge-amount">${this.inputMoney}</span>원</p>
         <h2>구매할 수 있는 상품 현황</h2>
         <table border="1">
             <thead>
@@ -32,12 +28,12 @@ export default class ProductPurchase extends Component {
                     <td class="product-purchase-price" data-product-price="${price}">${price}</td>
                     <td class="product-purchase-quantity" data-product-quantity="${quantity}">${quantity}</td>
                     <td><button class="purchase-button" ${
-                      quantity === 0 ? "disabled" : ""
+                      quantity === 0 ? 'disabled' : ''
                     }>구매하기</button></td>
                 </tr>
                 `;
                 })
-                .join("")}
+                .join('')}
             </tbody>
         </table>
         <h2>잔돈</h2>
@@ -58,7 +54,7 @@ export default class ProductPurchase extends Component {
               `;
             })
             .reverse()
-            .join("")}
+            .join('')}
         </tbody>
       </table>
     </section>
@@ -75,53 +71,48 @@ export default class ProductPurchase extends Component {
       returnChange,
     } = this.props;
 
-    $("#charge-button").addEventListener("click", () => {
-      const $inputMoney = Number($("#charge-input").value);
+    $('#charge-button').addEventListener('click', () => {
+      const $inputMoney = Number($('#charge-input').value);
 
       if (!isPositiveInteger($inputMoney) || !isMultipleOfTen($inputMoney)) {
-        alert(
-          "투입 금액은 양수이며 10원으로 나누어 떨어지는 금액만 가능합니다."
-        );
+        alert('투입 금액은 양수이며 10원으로 나누어 떨어지는 금액만 가능합니다.');
         return;
       }
 
       changeInputMoney(this.inputMoney + $inputMoney);
     });
 
-    $("table").addEventListener("click", ({ target }) => {
-      if (target.className !== "purchase-button") return;
+    $('table').addEventListener('click', ({ target }) => {
+      if (target.className !== 'purchase-button') return;
 
-      const $purchaseTargetFirstElement =
-        target.closest("tr").firstElementChild;
+      const $purchaseTargetFirstElement = target.closest('tr').firstElementChild;
       const productName = $purchaseTargetFirstElement.dataset.productName;
       const productPrice = Number(
         $purchaseTargetFirstElement.nextElementSibling.dataset.productPrice
       );
 
       if (this.inputMoney < productPrice) {
-        alert("구매하기 위한 투입금액이 부족합니다.");
+        alert('구매하기 위한 투입금액이 부족합니다.');
         return;
       }
 
       let cost = 0;
 
-      const newProductList = this.productList.map(
-        ({ name, price, quantity }) => {
-          if (name === productName) {
-            cost = price;
-            return { name, price, quantity: quantity - 1 };
-          } else {
-            return { name, price, quantity };
-          }
+      const newProductList = this.productList.map(({ name, price, quantity }) => {
+        if (name === productName) {
+          cost = price;
+          return { name, price, quantity: quantity - 1 };
+        } else {
+          return { name, price, quantity };
         }
-      );
+      });
 
       purchaseProduct(newProductList, cost);
     });
 
-    $("#coin-return-button").addEventListener("click", () => {
+    $('#coin-return-button').addEventListener('click', () => {
       if (this.inputMoney <= 0) {
-        alert("반환할 투입금액이 없습니다.");
+        alert('반환할 투입금액이 없습니다.');
         return;
       }
 
@@ -135,7 +126,7 @@ export default class ProductPurchase extends Component {
       const payCoinList = generatePayCoinList(this.inputMoney, coinList);
       const newCoinList = { ...coinList };
 
-      [10, 50, 100, 500].forEach((coin) => {
+      [10, 50, 100, 500].forEach(coin => {
         newCoinList[coin] -= payCoinList[coin];
       });
 

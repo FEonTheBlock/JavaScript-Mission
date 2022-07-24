@@ -1,10 +1,5 @@
-import Component from "../core/Component.js";
-import {
-  $,
-  generateCoinList,
-  isMultipleOfTen,
-  isPositiveInteger,
-} from "../utils/index.js";
+import Component from '../core/Component.js';
+import { $, generateCoinList, isMultipleOfTen, isPositiveInteger } from '../utils/index.js';
 
 export default class ChangeFill extends Component {
   template() {
@@ -13,9 +8,7 @@ export default class ChangeFill extends Component {
           <h2>자판기 동전 추가하기</h2>
           <input id="vending-machine-charge-input" type="number" />
           <button id="vending-machine-charge-button">충전하기</button>
-          <p id="vending-machine-charge-amount">보유 금액: ${
-            this.holdingMoney
-          }원</p>
+          <p id="vending-machine-charge-amount">보유 금액: ${this.holdingMoney}원</p>
           <h2>동전 보유 현황</h2>
           <table border="1">
             <thead>
@@ -27,13 +20,13 @@ export default class ChangeFill extends Component {
                 .map(([key, val]) => {
                   return `
                   <tr>
-                    <td id=vending-machine-coin-${key}-quantity">${key}원</td>
-                    <td>${val}개</td>
+                    <td>${key}원</td>
+                    <td id="vending-machine-coin-${key}-quantity">${val}개</td>
                   </tr>
                   `;
                 })
                 .reverse()
-                .join("")}
+                .join('')}
             </tbody>
           </table>
         </section>
@@ -43,11 +36,11 @@ export default class ChangeFill extends Component {
   setEvent() {
     const { chargeChange } = this.props;
 
-    $("#vending-machine-charge-button").addEventListener("click", () => {
-      const amount = Number($("#vending-machine-charge-input").value);
+    $('#vending-machine-charge-button').addEventListener('click', () => {
+      const amount = Number($('#vending-machine-charge-input').value);
 
       if (!isPositiveInteger(amount) || !isMultipleOfTen(amount)) {
-        alert("충전 금액은 양수이면서 10의 배수이어야 합니다.");
+        alert('충전 금액은 양수이면서 10의 배수이어야 합니다.');
         return;
       }
 
