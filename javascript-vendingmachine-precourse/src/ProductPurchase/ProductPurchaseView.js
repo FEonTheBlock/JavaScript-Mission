@@ -11,7 +11,9 @@ export default class ProductPurchaseView {
           <input id="charge-input" type="number" placeholder="투입할 금액"/>
           <button type="submit" id="charge-button">투입하기</button>
         </fieldset>
-        <span id="charge-amount"></span>
+        <span>
+        투입한 금액: <span id="charge-amount"></span>원
+      </span>
       </form>
       <section id="available-product-section">
         <h2>구매할 수 있는 상품 현황</h2>
@@ -35,10 +37,11 @@ export default class ProductPurchaseView {
     $('#available-product-table').addEventListener('click', e => this.onClickPurchaseProduct(e));
     $('#coin-return-button').addEventListener('click', () => this.onClickReturnChange());
   }
+  x;
 
   // 투입 금액 뷰 업데이트
   updateInsertCoins(inserted) {
-    $('#charge-amount').textContent = `투입한 금액 : ${inserted}원`;
+    $('#charge-amount').textContent = `${inserted}`;
   }
 
   // 상품 목록 뷰 업데이트
@@ -130,30 +133,30 @@ export default class ProductPurchaseView {
     const { coin500, coin100, coin50, coin10 } = coinsForChange;
 
     return `
-      <thead>
-        <tr>
-          <th>동전</th>
-          <th>개수</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>500원</td>
-          <td>${coin500}개</td>
-        </tr>
-        <tr>
-          <td>100원</td>
-          <td>${coin100}개</td>
-        </tr>
-        <tr>
-          <td>50원</td>
-          <td>${coin50}개</td>
-        </tr>
-        <tr>
-          <td>10원</td>
-          <td>${coin10}개</td>
-        </tr>
-      </tbody>
-    `;
+    <thead>
+    <tr>
+      <th>동전</th>
+      <th>개수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>500원</td>
+      <td>${coin500}개</td>
+    </tr>
+    <tr>
+      <td>100원</td>
+      <td>${coin100}개</td>
+    </tr>
+    <tr>
+      <td>50원</td>
+      <td>${coin50}개</td>
+    </tr>
+    <tr>
+      <td>10원</td>
+      <td>${coin10}개</td>
+    </tr>
+  </tbody>
+`;
   }
 }
