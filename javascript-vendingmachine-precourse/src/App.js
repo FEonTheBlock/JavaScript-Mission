@@ -2,6 +2,8 @@ import { $ } from './utils/dom.js';
 import ProductManageController from './ProductManage/ProductManageController.js';
 import ChangeManageController from './ChangeManage/ChangeManageController.js';
 import ProductPurchaseController from './ProductPurchase/ProductPurchaseController.js';
+import { validateProdList, validateChanges } from './utils/validation.js';
+import Dialog from './utils/dialog.js';
 
 export default class App {
   template = `
@@ -57,6 +59,13 @@ export default class App {
 
   // 상품 구매 탭 렌더링
   renderProductPurchaseMenu() {
+    try {
+      validateProdList(); //상품 목록 검사
+      validateChanges(); //잔돈 현황 검사
+    } catch (error) {
+      Dialog.error(error);
+      return;
+    }
     this.ProductPurchaseController.renderProductPurchaseMenu();
   }
 }
