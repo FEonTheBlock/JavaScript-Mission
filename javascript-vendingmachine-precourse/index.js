@@ -1,10 +1,10 @@
 const productPurchase = document.getElementById('product-purchase');
-const vendingMachineChargeButton = document.getElementById('vending-machine-charge-button');
-const chargeButton = document.getElementById('charge-button');
+const vendingMachineCharge = document.getElementById('vending-machine-charge');
+const charge = document.getElementById('charge');
 
 productPurchase.addEventListener('submit',(e)=>{
     e.preventDefault();
-    
+
     const productNameInput = document.getElementById('product-name-input');
     const productPriceInput = document.getElementById('product-price-input');
     const productQuantityInput = document.getElementById('product-quantity-input');
@@ -35,7 +35,9 @@ productPurchase.addEventListener('submit',(e)=>{
     productQuantityInput.value='';
 });
 
-vendingMachineChargeButton.addEventListener('click',()=>{
+vendingMachineCharge.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
     const vendingMachineChargeInput = document.getElementById('vending-machine-charge-input');
 
     let money = vendingMachineChargeInput.value/1;
@@ -68,7 +70,9 @@ vendingMachineChargeButton.addEventListener('click',()=>{
     vendingMachineChargeInput.value='';
 });
 
-chargeButton.addEventListener('click',()=>{
+charge.addEventListener('submit',(e)=>{
+    e.preventDefault();
+
    const chargeInput = document.getElementById('charge-input');
 
    let money = chargeInput.value/1;
