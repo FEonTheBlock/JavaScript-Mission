@@ -49,19 +49,19 @@ export default class ChangeManageView {
       <tbody>
         <tr>
           <td>500원</td>
-          <td>${coin500}</td>
+          <td id="vending-machine-coin-500-quantity">${coin500}개</td>
         </tr>
         <tr>
           <td>100원</td>
-          <td>${coin100}</td>
+          <td id="vending-machine-coin-100-quantity">${coin100}개</td>
         </tr>
         <tr>
           <td>50원</td>
-          <td>${coin50}</td>
+          <td id="vending-machine-coin-50-quantity">${coin50}개</td>
         </tr>
         <tr>
           <td>10원</td>
-          <td>${coin10}</td>
+          <td id="vending-machine-coin-10-quantity">${coin10}개</td>
         </tr>
       </tbody>
     `;
