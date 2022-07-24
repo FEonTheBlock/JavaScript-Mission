@@ -1,6 +1,10 @@
-export const AddMenu = (className = 'product-add-menu') => {
+import { Store } from '@/types';
+
+export const AddMenu = (store: Store) => {
+  const { product, charge } = store;
+
   const $addMenu = document.createElement('div');
-  $addMenu.className = className;
+  $addMenu.className = 'product-add-menu';
   $addMenu.innerHTML = `
   <h2>금액 투입</h2>
   <label>
@@ -22,21 +26,23 @@ export const AddMenu = (className = 'product-add-menu') => {
       </tr>
     </thead>
     <tbody>
-      <tr class="product-purchase-item">
-        <td class="product-purchase-name" data-product-name="코올라">
-          코올라
-        </td>
-        <td class="product-purchase-price" data-product-price="1000000">
-          1000000
-        </td>
-        <td
-          class="product-purchase-quantity"
-          data-product-quantity="111111"
-        >
-          111111
-        </td>
-        <td><button class="purchase-button">구매하기</button></td>
-      </tr>
+    ${product.map(
+      ({ name, price, quantity }) => `<tr class="product-purchase-item">
+    <td class="product-purchase-name" data-product-name="${name}">
+      ${name}
+    </td>
+    <td class="product-purchase-price" data-product-price="${price}">
+      ${price}
+    </td>
+    <td
+      class="product-purchase-quantity"
+      data-product-quantity="${quantity}"
+    >
+      ${quantity}
+    </td>
+    <td><button class="purchase-button">구매하기</button></td>
+  </tr>`
+    )}
     </tbody>
   </table>
 
@@ -52,19 +58,19 @@ export const AddMenu = (className = 'product-add-menu') => {
     <tbody>
       <tr>
         <th>500원</th>
-        <td id="coin-500-quantity"></td>
+        <td id="coin-500-quantity">${charge[500]}</td>
       </tr>
       <tr>
         <th>100원</th>
-        <td id="coin-100-quantity"></td>
+        <td id="coin-100-quantity">${charge[100]}</td>
       </tr>
       <tr>
         <th>50원</th>
-        <td id="coin-50-quantity"></td>
+        <td id="coin-50-quantity">${charge[50]}</td>
       </tr>
       <tr>
         <th>10원</th>
-        <td id="coin-10-quantity"></td>
+        <td id="coin-10-quantity">${charge[10]}</td>
       </tr>
     </tbody>
   </table>`;

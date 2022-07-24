@@ -1,25 +1,11 @@
-import { Menu } from '@/types';
+import { Store } from '@/types';
 
-type Product = {
-  name: string;
-  price: number;
-  quantity: number;
-};
-
-type Store = {
-  actualMenu: Menu;
-  product: Product[];
-  charge: {
-    500: number;
-    100: number;
-    50: number;
-    10: number;
-  };
-};
-
-export const store: Store = {
+const store: Store = {
   actualMenu: 'product-add-menu',
-  product: [],
+  product: [
+    { name: '코올라', price: 100, quantity: 33 },
+    { name: '코올라2', price: 1002, quantity: 332 },
+  ],
   charge: {
     500: 0,
     100: 0,
@@ -27,3 +13,5 @@ export const store: Store = {
     10: 0,
   },
 };
+
+export default store;

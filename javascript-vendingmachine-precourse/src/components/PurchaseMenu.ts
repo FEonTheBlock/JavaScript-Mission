@@ -1,9 +1,33 @@
-export const PurchaseMenu = (className = 'product-purchase-menu') => {
+import { Store } from '@/types';
+
+export const PurchaseMenu = (store: Store) => {
   const $purchaseMenu = document.createElement('div');
-  $purchaseMenu.className = className;
+  $purchaseMenu.className = 'product-purchase-menu';
+
+  const { product } = store;
+
+  // const $rows = product.map(({ name, price, quantity }) => {
+  //   const $row = document.createElement('tr');
+
+  //   const $name = document.createElement('td');
+  //   $name.className = 'product-manage-name';
+  //   $name.textContent = name;
+
+  //   const $price = document.createElement('td');
+  //   $price.className = 'product-manage-price';
+  //   $price.textContent = price + '';
+
+  //   const $quantity = document.createElement('td');
+  //   $quantity.className = 'product-manage-price';
+  //   $quantity.textContent = quantity + '';
+
+  //   $row.append($name, $price, $quantity);
+
+  //   return $row;
+  // });
+
   $purchaseMenu.innerHTML = `
-  product-purchase-menu
-  <form>
+    <form>
       <h2>상품 추가하기</h2>
       <input type="text" id="product-name-input" placeholder="상품명"/>
       <input type="number" id="product-price-input" placeholder="가격"/>
@@ -20,11 +44,13 @@ export const PurchaseMenu = (className = 'product-purchase-menu') => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="product-manage-name">콜라</td>
-          <td class="product-manage-price">222</td>
-          <td class="product-manage-quantity">33</td>
-        </tr>
+        ${product.map(
+          ({ name, price, quantity }) => `<tr>
+        <td class="product-manage-name">${name}</td>
+        <td class="product-manage-price">${price}</td>
+        <td class="product-manage-quantity">${quantity}</td>
+      </tr>`
+        )}
       </tbody>
     </table>`;
   return $purchaseMenu;

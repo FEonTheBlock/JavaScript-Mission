@@ -1,5 +1,5 @@
 import { Menu } from '@/types';
-import { store } from '@/store';
+import store from '@/store';
 import { addClassWithoutExcept } from '@/utils';
 import { TabMenu, Content } from '@/components';
 
@@ -11,7 +11,7 @@ export const App = () => {
   $title.textContent = '자판기';
 
   const $tabs = TabMenu();
-  const $content = Content();
+  const $content = Content(store);
   const $contentChildren = Array(...$content.children);
   $app.append($title, $tabs, $content);
 

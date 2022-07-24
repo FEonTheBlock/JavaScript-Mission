@@ -7,7 +7,7 @@ table {
   border-radius: 5px;
 }
 
-table > thead {
+tr > th {
   background-color: pink;
 }
 
@@ -15,6 +15,6 @@ tr > * {
   padding: 5px;
 }
 
-tbody > tr:hover {
+tr:hover {
   background-color: lightgray;
 }

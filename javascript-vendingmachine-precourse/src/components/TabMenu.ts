@@ -1,8 +1,11 @@
 import { Menu } from '@/types';
+import store from '@/store';
 
-export const TabMenu = (className?: string) => {
+export const TabMenu = () => {
+  const { actualMenu } = store;
+
   const $tabs = document.createElement('ul');
-  $tabs.className = className || 'tabs';
+  $tabs.className = 'tabs';
 
   $tabs.innerHTML = `<li>
   <button id="product-purchase-menu">상품 관리</button>

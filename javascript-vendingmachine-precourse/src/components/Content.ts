@@ -1,9 +1,10 @@
 import { AddMenu, ManageMenu, PurchaseMenu } from '@/components';
+import { Store } from '@/types';
 
-export const Content = (className = 'content') => {
+export const Content = (store: Store) => {
   const $content = document.createElement('div');
-  $content.className = className;
-  $content.append(PurchaseMenu(), ManageMenu(), AddMenu());
+  $content.className = 'content';
+  $content.append(PurchaseMenu(store), ManageMenu(store), AddMenu(store));
 
   return $content;
 };
