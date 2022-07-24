@@ -1,7 +1,8 @@
-import { Store } from '@/types';
+import store from '@/store';
+import { handleCharge } from '@/hooks';
 
-export const ManageMenu = (store: Store) => {
-  const { charge } = store;
+export const ManageMenu = (store: store) => {
+  const charge = store.store.charge;
 
   const $manageMenu = document.createElement('div');
   $manageMenu.className = 'vending-machine-manage-menu';
@@ -9,32 +10,34 @@ export const ManageMenu = (store: Store) => {
   const $manageCoinInput = document.createElement('div');
   const $manageCoinList = document.createElement('div');
 
-  const $manageTitle = document.createElement('h2');
-  $manageTitle.textContent = '자판기 동전 충전하기';
-
-  const $manageLabel = document.createElement('label');
-  const $manageInput = document.createElement('input');
-  $manageInput.setAttribute('type', 'number');
-  $manageInput.setAttribute('id', 'vending-machine-charge-input');
-  $manageInput.setAttribute('placeholder', '충전할 금액');
-  $manageLabel.append($manageInput);
+  $manageCoinInput.innerHTML = `
+    <h2>자판기 동전 충전하기</h2>
+    <label>
+      <input type="number" id="vending-machine-charge-input" placeholder="충전할 금액" min="0" step="10" />
+    </label>
+  `;
 
   const $manageButton = document.createElement('button');
   $manageButton.textContent = '충전하기';
   $manageButton.setAttribute('id', 'vending-machine-charge-button');
 
-  const $chargeAmountWrap = document.createElement('div');
-  $chargeAmountWrap.textContent = '보유 금액: ';
-  const $chargeAmount = document.createElement('span');
-  $chargeAmount.setAttribute('id', 'vending-machine-charge-amount');
-  $chargeAmount.textContent =
-    Object.entries(charge).reduce(
-      (acc, [coin, amount]) => acc + +coin * amount,
-      0
-    ) + '원';
-  $chargeAmountWrap.append($chargeAmount);
+  $manageButton.addEventListener('click', () => {
+    const $chargeInput = document.getElementById(
+      'vending-machine-charge-input'
+    ) as HTMLInputElement;
+    handleCharge(store, $chargeInput);
+  });
 
-  $manageCoinInput.append($manageTitle, $manageLabel, $chargeAmountWrap);
+  const $chargeAmountWrap = document.createElement('div');
+  $chargeAmountWrap.innerHTML = `
+    보유 금액: <span id='vending-machine-charge-amount'>${
+      Object.entries(charge).reduce(
+        (acc, [coin, amount]) => acc + +coin * amount,
+        0
+      ) + '원'
+    }</span>
+  `;
+  $manageCoinInput.append($manageButton, $chargeAmountWrap);
 
   $manageCoinList.innerHTML = `
 <h2>동전 보유 현황</h2>

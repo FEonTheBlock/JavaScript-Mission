@@ -26,3 +26,5 @@ export type Store = {
   product: Product[];
   charge: Charge;
 };
+
+export type Coin = 10 | 50 | 100 | 500;

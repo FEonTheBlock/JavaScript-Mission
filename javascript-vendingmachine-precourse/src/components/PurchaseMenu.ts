@@ -1,57 +1,56 @@
-import { Store } from '@/types';
+import { handlePurchaseMenu } from '@/hooks';
+import store from '@/store';
 
-export const PurchaseMenu = (store: Store) => {
+export const PurchaseMenu = (store: store) => {
+  const { product } = store.store;
   const $purchaseMenu = document.createElement('div');
   $purchaseMenu.className = 'product-purchase-menu';
 
-  const { product } = store;
+  const $purchaseMenuForm = document.createElement('form');
+  $purchaseMenuForm.setAttribute('id', 'product-purchase-form');
 
-  // const $rows = product.map(({ name, price, quantity }) => {
-  //   const $row = document.createElement('tr');
+  const $formButton = document.createElement('button');
+  $formButton.setAttribute('id', 'product-add-button');
+  $formButton.setAttribute('type', 'button');
+  $formButton.innerHTML = '추가하기';
 
-  //   const $name = document.createElement('td');
-  //   $name.className = 'product-manage-name';
-  //   $name.textContent = name;
+  $formButton.addEventListener('click', () => {
+    const $form = document.getElementById(
+      'product-purchase-form'
+    ) as HTMLFormElement;
+    handlePurchaseMenu(store, $form);
+  });
 
-  //   const $price = document.createElement('td');
-  //   $price.className = 'product-manage-price';
-  //   $price.textContent = price + '';
+  $purchaseMenuForm.innerHTML = `
+    <h2>상품 추가하기</h2>
+    <input type="text" id="product-name-input" placeholder="상품명" name="name" required />
+    <input type="number" id="product-price-input" placeholder="가격" min="0" step="10" name="price" required />
+    <input type="number" id="product-quantity-input" placeholder="수량" min="0" name="quantity" required />
+  `;
+  $purchaseMenuForm.append($formButton);
 
-  //   const $quantity = document.createElement('td');
-  //   $quantity.className = 'product-manage-price';
-  //   $quantity.textContent = quantity + '';
+  const $purchaseMenuList = document.createElement('div');
+  $purchaseMenuList.innerHTML = `<table class="products">
+  <h2>상품 현황</h2>
+  <thead>
+    <tr>
+      <th class="product-manage-name">상품명</th>
+      <th class="product-manage-price">가격</th>
+      <th class="product-manage-quantity">수량</th>
+    </tr>
+  </thead>
+  <tbody>
+    ${product.map(
+      ({ name, price, quantity }) => `<tr>
+    <td class="product-manage-name">${name}</td>
+    <td class="product-manage-price">${price}</td>
+    <td class="product-manage-quantity">${quantity}</td>
+  </tr>`
+    )}
+  </tbody>
+</table>`;
 
-  //   $row.append($name, $price, $quantity);
+  $purchaseMenu.append($purchaseMenuForm, $purchaseMenuList);
 
-  //   return $row;
-  // });
-
-  $purchaseMenu.innerHTML = `
-    <form>
-      <h2>상품 추가하기</h2>
-      <input type="text" id="product-name-input" placeholder="상품명"/>
-      <input type="number" id="product-price-input" placeholder="가격"/>
-      <input type="number" id="product-quantity-input" placeholder="수량"/>
-      <button id="product-add-button">추가하기</button>
-    </form>
-    <table class="products">
-      <h2>상품 현황</h2>
-      <thead>
-        <tr>
-          <th class="product-manage-name">상품명</th>
-          <th class="product-manage-price">가격</th>
-          <th class="product-manage-quantity">수량</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${product.map(
-          ({ name, price, quantity }) => `<tr>
-        <td class="product-manage-name">${name}</td>
-        <td class="product-manage-price">${price}</td>
-        <td class="product-manage-quantity">${quantity}</td>
-      </tr>`
-        )}
-      </tbody>
-    </table>`;
   return $purchaseMenu;
 };

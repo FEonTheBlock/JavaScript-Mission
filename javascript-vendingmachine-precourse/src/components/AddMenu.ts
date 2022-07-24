@@ -1,7 +1,7 @@
-import { Store } from '@/types';
+import store from '@/store';
 
-export const AddMenu = (store: Store) => {
-  const { product, charge } = store;
+export const AddMenu = (store: store) => {
+  const { product, charge } = store.store;
 
   const $addMenu = document.createElement('div');
   $addMenu.className = 'product-add-menu';
@@ -9,7 +9,7 @@ export const AddMenu = (store: Store) => {
   <h2>금액 투입</h2>
   <label>
     금액
-    <input id="charge-input" type="number" placeholder="투입금액" />
+    <input id="charge-input" type="number" placeholder="투입금액" min="0"/>
   </label>
   <button id="charge-button">투입하기</button>
 

@@ -1,16 +1,16 @@
 import { Menu } from '@/types';
-import store from '@/store';
 import { addClassWithoutExcept } from '@/utils';
 import { TabMenu, Content } from '@/components';
+import store from '@/store';
 
-let { actualMenu } = store;
+export const App = (store: store) => {
+  const actualMenu = store.store.actualMenu;
 
-export const App = () => {
   const $app = document.createDocumentFragment();
   const $title = document.createElement('h1');
   $title.textContent = '자판기';
 
-  const $tabs = TabMenu();
+  const $tabs = TabMenu(store);
   const $content = Content(store);
   const $contentChildren = Array(...$content.children);
   $app.append($title, $tabs, $content);
@@ -19,10 +19,8 @@ export const App = () => {
 
   $tabs.addEventListener('click', (e: any) => {
     const id: Menu = e.target.getAttribute('id');
-    if (id === actualMenu || !id) {
-      return;
-    }
-    actualMenu = id;
+    if (id === store.store.actualMenu || e.target.type !== 'button') return;
+    store.setActualMenu = id;
     addClassWithoutExcept('hidden', $contentChildren, [id]);
   });
 
