@@ -1,8 +1,10 @@
-const productAddButton = document.getElementById('product-add-button');
+const productPurchase = document.getElementById('product-purchase');
 const vendingMachineChargeButton = document.getElementById('vending-machine-charge-button');
 const chargeButton = document.getElementById('charge-button');
 
-productAddButton.addEventListener('click',()=>{
+productPurchase.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    
     const productNameInput = document.getElementById('product-name-input');
     const productPriceInput = document.getElementById('product-price-input');
     const productQuantityInput = document.getElementById('product-quantity-input');
@@ -13,10 +15,17 @@ productAddButton.addEventListener('click',()=>{
     const productManageQuantity = document.createElement('td');
 
     if(productNameInput.value && productPriceInput.value && productQuantityInput.value){
+        const name = productNameInput.value;
+        const price = productPriceInput.value;
+        const quantity = productQuantityInput.value;
+
         productManageItem.classList.add('product-manage-item');
-        productManageItem.append(productNameInput.value,productManageName);
-        productManageItem.append(productPriceInput.value,productManagePrice);
-        productManageItem.append(productQuantityInput.value,productManageQuantity);
+        productManageName.textContent = name;
+        productManagePrice.textContent = price;
+        productManageQuantity.textContent = quantity;
+        productManageItem.append(productManageName);
+        productManageItem.append(productManagePrice);
+        productManageItem.append(productManageQuantity);
         
         productManageItems.append(productManageItem);
     }
