@@ -1,0 +1,53 @@
+{
+  "name": "javascript-vendingmachine-precourse",
+  "version": "1.0.0",
+  "description": "우아한테크코스 프리코스 자판기 미션",
+  "dependencies": {
+    "@woowacourse/mission-utils": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-typescript": "^7.17.12",
+    "@types/node": "^17.0.42",
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "babel-loader": "^8.2.5",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^6.7.1",
+    "cypress": "8.7.0",
+    "eslint": "^8.2.0",
+    "eslint-config-airbnb-base": "15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-html": "^6.2.0",
+    "eslint-plugin-import": "^2.25.2",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.1",
+    "typescript": "^4.7.3",
+    "webpack": "^5.73.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.9.2"
+  },
+  "scripts": {
+    "test": "cypress run --browser chrome",
+    "start": "npm run serve -- --open ",
+    "serve": "webpack serve --mode development",
+    "build": "webpack build --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/woowacourse/javascript-vendingmachine-precourse.git"
+  },
+  "keywords": [],
+  "author": "woowacourse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/woowacourse/javascript-vendingmachine-precourse/issues"
+  },
+  "homepage": "https://github.com/woowacourse/javascript-vendingmachine-precourse#readme",
+  "engineStrict": true,
+  "engines": {
+    "npm": ">=6.0.0",
+    "node": ">=14.0.0"
+  }
+}
