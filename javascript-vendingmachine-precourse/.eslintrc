@@ -18,6 +18,7 @@
   "plugins": ["@typescript-eslint", "html"],
   "rules": {
     "import/no-unresolved": "off",
-    "import/extensions": "off"
+    "import/extensions": "off",
+    "no-alert": "off"
   }
 }

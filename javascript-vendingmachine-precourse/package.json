@@ -32,7 +32,7 @@
     "test": "cypress run --browser chrome",
     "start": "npm run serve -- --open ",
     "serve": "webpack serve --mode development",
-    "build": "webpack build"
+    "build": "webpack build --mode production"
   },
   "repository": {
     "type": "git",

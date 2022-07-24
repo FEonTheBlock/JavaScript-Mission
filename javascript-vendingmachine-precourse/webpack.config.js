@@ -1,8 +1,8 @@
-const path = require('path');
-const htmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path')
+const htmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = (env, { mode }) => ({
-  entry: './src/js/index.ts',
+  entry: './src/index.ts',
   output: {
     path: path.join(__dirname, 'build'),
     filename: 'build.js',
@@ -47,4 +47,4 @@ module.exports = (env, { mode }) => ({
     }),
   ],
   devtool: mode === 'development' ? 'eval-cheap-source-map' : false,
-});
+})
