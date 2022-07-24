@@ -9,7 +9,7 @@ export default class App {
       <button id="vending-machine-manage-menu">잔돈 충전</button>
       <button id="product-purchase-menu">상품 구매</button>
     </nav>
-    <span>👆메뉴를 클릭 시, 해당 페이지로 이동됩니다.👆</span>
+    <span>👆메뉴 클릭 시, 해당 페이지로 이동됩니다.👆</span>
     <main id="current-menu"></main>
   `;
 
