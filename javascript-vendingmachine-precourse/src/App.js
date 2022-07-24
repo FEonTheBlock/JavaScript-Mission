@@ -1,5 +1,6 @@
 import { $ } from './utils/dom.js';
 import ProductManageController from './ProductManage/ProductManageController.js';
+import ChangeManageController from './ChangeManage/ChangeManageController.js';
 import { setData } from './utils/storage.js';
 
 export default class App {
@@ -14,13 +15,15 @@ export default class App {
   `;
 
   $target; // app
-  ProductManageController;
+  ProductManageController; // 상품 관리 controller
+  ChangeManageController; // 잔돈 충전 controller
 
   constructor($target) {
     this.$target = $target;
     this.$target.innerHTML = this.template;
 
     this.productManageController = new ProductManageController();
+    this.ChangeManageController = new ChangeManageController();
     $('#vending-machine-menu').addEventListener('click', e => this.onClickMenu(e));
   }
 
@@ -30,12 +33,19 @@ export default class App {
       case 'product-add-menu':
         this.renderProductManageMenu();
         break;
+      case 'vending-machine-manage-menu':
+        this.renderChangeManageMenu();
+        break;
     }
   }
 
   // 상품 관리 탭 렌더링
   renderProductManageMenu() {
     this.productManageController.renderProductAddMenu();
-    setData('latestMenu', 'productAdd');
+  }
+
+  // 잔돈 충전 탭 렌더링
+  renderChangeManageMenu() {
+    this.ChangeManageController.renderChangeManageMenu();
   }
 }
