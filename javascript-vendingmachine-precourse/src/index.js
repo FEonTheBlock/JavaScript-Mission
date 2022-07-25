@@ -1,6 +1,8 @@
+import Admin from './components/Admin.js';
+import Changes from './components/Changes.js';
 import Component from './components/Component.js';
-import Main from './components/Main.js';
 import Navigator from './components/Navigator.js';
+import Purchase from './components/Purchase.js';
 import { MENUS } from './utils/const.js';
 import { getItem } from './utils/localStorage.js';
 
@@ -37,14 +39,29 @@ class App extends Component {
     new Navigator('Navigator', $navigator, {
       changeMenu: this.changeMenu.bind(this),
     });
-    new Main('Main', $main, {
-      currentPage: this.$state.currentPage,
-      products: this.$state.products,
-      updateProduct: this.updateProduct.bind(this),
-      changes: this.$state.changes,
-      addCoins: this.addCoins.bind(this),
-      decreaseProduct: this.decreaseProduct.bind(this),
-    });
+
+    const { currentPage, products, changes } = this.$state;
+
+    switch (currentPage) {
+      case MENUS.ADMIN:
+        new Admin('Admin', $main, {
+          products,
+          updateProduct: this.updateProduct.bind(this),
+        });
+        break;
+      case MENUS.CHANGES:
+        new Changes('Changes', $main, {
+          changes,
+          addCoins: this.addCoins.bind(this),
+        });
+        break;
+      case MENUS.PURCHASE:
+        new Purchase('Purchase', $main, {
+          products,
+          changes,
+          decreaseProduct: this.decreaseProduct.bind(this),
+        });
+    }
   }
 
   removeCoins(useTotal, useCoins) {
