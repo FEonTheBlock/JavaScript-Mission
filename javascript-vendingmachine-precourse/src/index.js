@@ -2,18 +2,15 @@ import Component from './components/Component.js';
 import Main from './components/Main.js';
 import Navigator from './components/Navigator.js';
 import { MENUS } from './utils/const.js';
+import { getItem } from './utils/localStorage.js';
 
 class App extends Component {
   setup() {
+    const newState = getItem('App');
+
     this.$state = {
       currentPage: MENUS.CHANGES,
-      products: [
-        {
-          name: '콜라',
-          cost: 1000,
-          count: 34,
-        },
-      ],
+      products: [],
       changes: {
         coins: {
           500: 0,
@@ -23,6 +20,7 @@ class App extends Component {
         },
         total: 0,
       },
+      ...newState,
     };
   }
   template() {

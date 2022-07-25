@@ -2,19 +2,15 @@ import { pickRandomCoins } from '../utils/pickCoins.js';
 import Component from './Component.js';
 
 export default class Changes extends Component {
-  setup() {
-    this.$state = {
-      changes: this.$props.changes,
-    };
-  }
+  setup() {}
   template() {
-    const coins = Object.entries(this.$state.changes.coins);
+    const coins = Object.entries(this.$props.changes.coins);
 
     const ChangesInputs = `
       <h2>자판기 동전 충전하기</h2> 
       <input id="vending-machine-charge-input" type="number" />
       <button id="vending-machine-charge-button">충전하기</button>
-      <p id="vending-machine-charge-amount">보유 금액: ${this.$state.changes.total}</p>
+      <p id="vending-machine-charge-amount">보유 금액: ${this.$props.changes.total}</p>
     `;
 
     const CoinTr = coins

@@ -1,3 +1,5 @@
+import { getItem, setItem } from '../utils/localStorage.js';
+
 export default class Component {
   $target;
   $state;
@@ -6,13 +8,9 @@ export default class Component {
   $componentName;
 
   constructor($componentName, $target, $props) {
-    const localState = JSON.parse(localStorage.getItem($componentName));
-    // console.log($componentName, localStorage.getItem($componentName));
-
     this.$componentName = $componentName;
     this.$target = $target;
     this.$props = $props;
-    this.$state = { ...this.$state, ...localState };
     this.setup();
     this.setEvent();
     this.render();
@@ -29,10 +27,9 @@ export default class Component {
   }
   setEvent() {}
   setState(newState) {
+    const updatedState = { ...getItem(this.$componentName), ...newState };
+    setItem(this.$componentName, updatedState);
     this.$state = { ...this.$state, ...newState };
-    localStorage.setItem(this.$componentName, JSON.stringify(this.$state));
-    // console.log(this.$componentName, JSON.stringify(this.$state));
-
     this.render();
   }
   addEvent(eventType, selector, callback) {

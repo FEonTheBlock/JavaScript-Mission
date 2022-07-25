@@ -1,13 +1,8 @@
 import Component from './Component.js';
 
 export default class Admin extends Component {
-  setup() {
-    this.$state = {
-      products: this.$props.products,
-    };
-  }
   template() {
-    const ProductTr = this.$state.products
+    const ProductTr = this.$props.products
       .map(
         ({ name, cost, count }) => `
       <tr class="product-manage-item" >

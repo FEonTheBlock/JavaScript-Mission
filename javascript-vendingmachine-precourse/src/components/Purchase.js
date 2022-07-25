@@ -1,10 +1,13 @@
+import { getItem } from '../utils/localStorage.js';
 import { pickMinCoins } from '../utils/pickCoins.js';
 import Component from './Component.js';
 
 export default class Purchase extends Component {
   setup() {
+    const newState = getItem('Purchase');
     this.$state = {
       totalInput: 0,
+      ...newState,
       returnCoins: {
         500: null,
         100: null,
@@ -108,6 +111,11 @@ export default class Purchase extends Component {
       name: productName,
       price: productPrice,
       quantity: productQuantity,
+    });
+
+    this.setState({
+      ...this.$state,
+      totalInput: this.$state.totalInput - Number(productPrice),
     });
   }
   handleReturn() {
