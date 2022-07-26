@@ -19,7 +19,6 @@ export default class App extends Component {
     this.domNode.insertAdjacentHTML("beforeend", '<main class="main"><main>');
 
     const $main = $(".main");
-    console.log(this.state);
 
     if (this.state.currentTab === "product-add-menu") {
       new ProductManage($main, {
